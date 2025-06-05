@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
     <>
       {isMobile ? (
         <>
-          <header className="px-[5%] py-[1%] h-auto font-[300] line-[]">
+          <header className="px-[5%] bg-[#d2787800] py-[1%] h-auto font-[300] line-[]">
             <div className="items-center flex justify-between mx-auto ">
               <a href="/main" className="">
                 <img src="./logo.png" alt="logo" className="w-[75px] mx-auto" />
@@ -47,12 +47,6 @@ export const Header: React.FC = () => {
                 </p>
               </a>
               <div className="flex flex-row items-center gap-[20px]">
-                <img
-                  src="./menu.svg"
-                  alt="menu"
-                  className="m-auto h-[12px]"
-                  onClick={() => setMenu(!menu)}
-                />
                 <a
                   href="/basket"
                   className="w-[45px] h-[45px] rounded-full bg-[#C5364B] flex items-center relative"
@@ -72,6 +66,12 @@ export const Header: React.FC = () => {
                     </p>
                   </div>
                 </a>
+                <img
+                  src="./menu.svg"
+                  alt="menu"
+                  className="m-auto h-[12px]"
+                  onClick={() => setMenu(!menu)}
+                />
               </div>
             </div>
           </header>
@@ -89,7 +89,12 @@ export const Header: React.FC = () => {
                   <a href="/delivery">Доставка</a>
                   <a href="/menu">Меню</a>
                   <a href="/reviews">Отзывы</a>
-                  <p onClick={scrollToEnd} className="hover:cursor-pointer cursor-pointer">Контакты</p>
+                  <p
+                    onClick={scrollToEnd}
+                    className="hover:cursor-pointer cursor-pointer"
+                  >
+                    Контакты
+                  </p>
                 </div>
               </div>
               <div className="absolute w-full top-0 h-full bg-black opacity-20"></div>

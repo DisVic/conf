@@ -79,8 +79,13 @@ export const Basket = () => {
               <p className="font-['HelveticaNeueCyr'] text-[16px]  text-[#5e5757] text-center mt-[10px]">
                 К сожалению, корзина пока пуста. <br />
                 Перейдите в раздел{" "}
-                <a href = "/menu" className="font-['HelveticaNeueCyrb'] font-medium text-black hover:cursor-pointer hover:underline cursor-pointer">меню</a>, чтобы
-                начать покупки!
+                <a
+                  href="/menu"
+                  className="font-['HelveticaNeueCyrb'] font-medium text-black hover:cursor-pointer hover:underline cursor-pointer"
+                >
+                  меню
+                </a>
+                , чтобы начать покупки!
               </p>
             )}
           </div>
@@ -179,7 +184,7 @@ export const Basket = () => {
                     Отправить
                   </button>
                 </div>
-                <p className="text-center custom:text-[18px] mx-auto text-[12px] custom:hidden flex w-[70%] custom:w-[30%] custom:ml-[5%]">
+                <p className="text-center custom:text-[18px] mx-auto text-[13px] custom:hidden flex w-[70%] custom:w-[30%] custom:ml-[5%]">
                   Мы свяжемся с вами для уточнения деталей заказа, как только
                   получим вашу заявку на заказ!
                 </p>
@@ -209,7 +214,54 @@ export const Basket = () => {
           </div>
         </div>
       )}
-      <Footer />
+      <div className="mb-[48px] px-10 justify-center nemobile:hidden">
+        <p className="font-['HelveticaNeueCyr'] text-[13px] font-medium text-center">
+          Используйте наши социальные сети, чтобы связаться с нами или оставить
+          отзыв о нашей продукции! Наши сотрудники оперативно ответят вам и
+          помогут с вашими вопросами.
+        </p>
+        <p className="font-['HelveticaNeueCyr'] mt-[12px] font-medium text-[13px] text-center">
+          Колл-центр принимает звонки{" "}
+          <span className="font-['HelveticaNeueCyrb']">с 9:00 до 23:00.</span>{" "}
+          Ждем ваших вопросов, предложений и отзывов!
+        </p>
+        <p className="font-['HelveticaNeueCyrb'] mt-[12px] font-medium text-[13px] text-center">
+          8 999 765 65 65
+        </p>
+
+        <div className="flex items-center gap-2 mt-1 ml-[100px]">
+          <img
+            src="/instagram.svg"
+            alt="instagram"
+            className="w-4 h-4 self-end relative top-[-2px]"
+          />
+          <span className="font-['HelveticaNeueCyrr'] text-[13px]">
+            @confectioneryhouse
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2 mt-1 ml-[100px]">
+          <img
+            src="/tg.svg"
+            alt="tg"
+            className="w-4 h-4 self-end relative top-[-2px]"
+          />
+          <span className="font-['HelveticaNeueCyrr'] text-[13px]">
+            @confectioneryhouse
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2 mt-1 ml-[100px]">
+          <img
+            src="/vk.svg"
+            alt="vk"
+            className="w-4 h-4 self-end relative top-[-2px]"
+          />
+          <span className="font-['HelveticaNeueCyrr'] text-[13px]">
+            @confectioneryhouse
+          </span>
+        </div>
+      </div>
     </>
   );
 };

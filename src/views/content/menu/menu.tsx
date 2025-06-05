@@ -19,40 +19,74 @@ const Menu: MenuItem[] = [
 
 const sliderData = [
   {
-    name: "Пироженное Август",
-    price: "799",
-    description: "Вкус позднего лета с нежным шоколадом",
-    image: "/menu.jpg",
+    title: "Торт",
+    data: [
+      {
+        name: "Пироженное Август",
+        price: "799",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu.jpg",
+      },
+      {
+        name: "Торт Princess",
+        price: "2799",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu1.jpg",
+      },
+      {
+        name: "Бенто торт Birthday",
+        price: "999",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu2.jpg",
+      },
+      {
+        name: "Вафли Ягодный микс",
+        price: "899",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu3.jpg",
+      },
+      {
+        name: "Пончики Классические",
+        price: "1199",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu4.jpg",
+      },
+      {
+        name: "Конфеты Орешик",
+        price: "1599",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu5.jpg",
+      },
+    ],
   },
   {
-    name: "Торт Princess",
-    price: "2799",
-    description: "Вкус позднего лета с нежным шоколадом",
-    image: "/menu1.jpg",
-  },
-  {
-    name: "Бенто торт Birthday",
-    price: "999",
-    description: "Вкус позднего лета с нежным шоколадом",
-    image: "/menu2.jpg",
-  },
-  {
-    name: "Вафли Ягодный микс",
-    price: "899",
-    description: "Вкус позднего лета с нежным шоколадом",
-    image: "/menu3.jpg",
-  },
-  {
-    name: "Пончики Классические",
-    price: "1199",
-    description: "Вкус позднего лета с нежным шоколадом",
-    image: "/menu4.jpg",
-  },
-  {
-    name: "Конфеты Орешик",
-    price: "1599",
-    description: "Вкус позднего лета с нежным шоколадом",
-    image: "/menu5.jpg",
+    title: "Не торт",
+    data: [
+      {
+        name: "Бенто торт Birthday",
+        price: "999",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu2.jpg",
+      },
+      {
+        name: "Вафли Ягодный микс",
+        price: "899",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu3.jpg",
+      },
+      {
+        name: "Пончики Классические",
+        price: "1199",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu4.jpg",
+      },
+      {
+        name: "Конфеты Орешик",
+        price: "1599",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu5.jpg",
+      },
+    ],
   },
 ];
 
@@ -130,60 +164,131 @@ export const MenuPage = () => {
 
   return (
     <div className="bg-white h-auto">
-      <div className="pt-[20px] pb-[20px] max-w-[1234px] mx-auto px-[5%]">
+      <div className="pt-[20px] pb-[20px] max-w-[1234px] mx-auto px-[5%] mobile:hidden">
         <h1 className="font-[FontsDrops] text-center text-[96px] custom:mt-[150px]">
           Menu
         </h1>
-        <div className="flex flex-col items-start custom:flex-row mt-4">
-          
-          <div className="w-[75%] relative mx-auto grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-5">
-            {sliderData.map((item, i) => (
-              <div
-                key={i}
-                className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] max-w-[250px] mx-auto flex flex-col h-full"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full rounded-t-[45px] h-[175px]"
-                />
-                <div className="px-3 py-2 flex-grow">
-                  <div className="flex flex-row justify-between text-[15px]">
-                    <p className="font-bold font-[Choplin] text-[15px]">{item.name}</p>
-                    <p className="font-light">от {item.price}р</p>
-                  </div>
-                  <p className="text-[11px] font-light w-3/4">
-                    {item.description}
-                  </p>
-                </div>
-                <div className="mb-4 flex flex-row justify-between px-2">
-                  <button className="w-[48%] py-[10px] rounded-full bg-[#C5364B] text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-[white]">
-                    Купить
-                  </button>
-                  {cart.find((cartItem) => cartItem.name === item.name) ? (
-                    <button className="w-[48%] py-[10px] rounded-full bg-green-500 text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-[#C5364B]">
-                      Добавлено
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() =>
-                        addToCart(
-                          item.name,
-                          parseFloat(item.price.replace(/\s/g, ""))
-                        )
-                      }
-                      className="w-[48%] py-[10px] rounded-full bg-white text-black transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-[#C5364B]"
+        <div className="flex flex-col items-start custom:flex-row mt-4 w-full">
+          <div className="w-full space-y-10">
+            {sliderData.map((category, index) => (
+              <div key={index}>
+                <h2 className="text-[32px] font-['HelveticaNeueCyr'] font-bold mb-4">
+                  {category.title}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-5">
+                  {category.data.map((item, i) => (
+                    <div
+                      key={i}
+                      className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] max-w-[250px] mx-auto flex flex-col h-full"
                     >
-                      В корзину
-                    </button>
-                  )}
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full rounded-t-[45px] h-[175px]"
+                      />
+                      <div className="px-3 py-2 flex-grow">
+                        <div className="flex flex-row justify-between text-[15px]">
+                          <p className="font-bold font-[Choplin] text-[15px]">
+                            {item.name}
+                          </p>
+                          <p className="font-light">от {item.price}р</p>
+                        </div>
+                        <p className="text-[11px] font-light w-3/4">
+                          {item.description}
+                        </p>
+                      </div>
+                      <div className="mb-4 flex flex-row justify-between px-2">
+                        {cart.find(
+                          (cartItem) => cartItem.name === item.name
+                        ) ? (
+                          <button className="w-full py-[10px] rounded-full bg-green-500 text-white transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                            Добавлено
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() =>
+                              addToCart(
+                                item.name,
+                                parseFloat(item.price.replace(/\s/g, ""))
+                              )
+                            }
+                            className="w-full py-[10px] rounded-full bg-white text-black transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+                          >
+                            В корзину
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="mb-4 flex flex-row justify-between px-2"></div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      <div className="pt-[20px] pb-[20px] max-w-[1234px] mx-auto px-[5%] nemobile:hidden">
+        <h1 className="font-[FontsDrops] text-center text-[96px] custom:mt-[150px]">
+          Menu
+        </h1>
+        <div className="flex flex-col items-start custom:flex-row mt-4 w-full">
+          <div className="w-full space-y-10">
+            {sliderData.map((category, index) => (
+              <div key={index}>
+                <h2 className="text-[30px] font-['HelveticaNeueCyr'] font-bold mb-4">
+                  {category.title}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-5">
+                  {category.data.map((item, i) => (
+                    <div
+                      key={i}
+                      className="w-full bg-white rounded-[65px] border-[1px] border-[#F59696] max-w-[250px] mx-auto flex flex-col h-full"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full rounded-t-[65px] h-[175px]"
+                      />
+                      <div className="px-3 py-2 flex-grow">
+                        <div className="flex flex-row justify-between text-[15px]">
+                          <p className="font-bold font-[Choplin] text-[20px]">
+                            {item.name}
+                          </p>
+                        </div>
+                        <p className="text-[13px] font-light w-3/4">
+                          от {item.price}р
+                        </p>
+                      </div>
+                      <div className="flex flex-row justify-between">
+                        {cart.find(
+                          (cartItem) => cartItem.name === item.name
+                        ) ? (
+                          <button className="w-[100%] h-[55px] py-[10px] pb-[20px] rounded-b-[65px] bg-green-500 text-white transition-transform duration-300 ease-in-out hover:shadow-[#C5364B]">
+                            Добавлено
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() =>
+                              addToCart(
+                                item.name,
+                                parseFloat(item.price.replace(/\s/g, ""))
+                              )
+                            }
+                            className="w-[100%] h-[55px] py-[10px] pb-[20px] rounded-b-[65px] bg-[#C5364B] text-white transition-transform duration-300 ease-in-out hover:shadow-[#C5364B]"
+                          >
+                            Купить
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
