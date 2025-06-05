@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: "Helvetica Neue", sans-serif;
+  width: 100%;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #000;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+@font-face {
+  font-family: "FontsDrops";
+  src: url("./assets/FontsDrops.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+    font-family: 'Calliga';
+    src: url('./assets/Calliga-Regular.otf') format('woff2'),
+         url('./assets/Calliga-Regular.otf') format('woff');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('./assets/helveticaneuecyr_thin.otf') format('woff2'),
+         url('./assets/helveticaneuecyr_thin.otf') format('woff');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyrb';
+    src: url('./assets/helveticaneuecyr_black.otf') format('woff2'),
+         url('./assets/helveticaneuecyr_black.otf') format('woff');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyrr';
+    src: url('./assets/helveticaneuecyr_roman.otf') format('woff2'),
+         url('./assets/helveticaneuecyr_roman.otf') format('woff');
+}
+@font-face {
+    font-family: 'Choplinb';
+    src: url('./assets/Choplin-SemiBold.ttf') format('woff2'),
+         url('./assets/Choplin-SemiBold.ttf') format('woff');
+}
+@font-face {
+    font-family: 'Choplin';
+    src: url('./assets/Choplin-Medium.ttf') format('woff2'),
+         url('./assets/Choplin-Medium.ttf') format('woff');
+}
