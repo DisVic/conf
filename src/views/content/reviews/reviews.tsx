@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/layout/footer";
+import { useNavigate } from "react-router-dom";
 
 export const Reviews = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -7,8 +8,15 @@ export const Reviews = () => {
   const [alert, setAlert] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setTimeout(() => {
+      navigate("/main");
+      window.location.reload();
+    }, 1e3);
     setAlert("Отзыв отправлен!");
   };
+
+  const navigate = useNavigate();
 
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1000);
 
@@ -315,10 +323,10 @@ export const Reviews = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-[999999999]">
-          <div className="bg-[#fff] w-3/4 lg:w-2/4 px-[20px] sm:px-[50px] py-10 border-[#FECFCF] border-[1px] rounded-[29px] text-left">
+          <div className="bg-[#fff] w-[90%] lg:w-2/4 px-[20px] sm:px-[50px] py-10 border-[#FECFCF] border-[1px] rounded-[29px] text-left">
             <div className="flex flex-row items-center justify-between relative">
-              <h2 className="font-['HelveticaNeueCyrr'] text-[24px] font-medium text-center">
-                Заполните анкету, чтобы оставить отзыв
+              <h2 className="font-['HelveticaNeueCyrr'] custom:text-[24px] text-[18px] font-medium text-center">
+                Заполните анкету, чтобы рассчитать стоимость доставки
               </h2>
               <button
                 onClick={() => {
@@ -326,31 +334,41 @@ export const Reviews = () => {
                   setAlert("");
                   setError("");
                 }}
-                className="text-[32px] text-[#5e5757] transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] w-50%"
+                className="text-[32px] text-[#5e5757] transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2]"
               >
                 ×
               </button>
             </div>
             <div className="flex flex-col custom:flex-row items-center w-full">
               <form className="custom:w-[60%] w-full" onSubmit={handleSubmit}>
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] mt-[20px] font-medium">
+                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
                   Имя и Фамилия
                 </p>
                 <input
                   type="text"
                   className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
                 />
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] mt-[20px] font-medium">
+                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
+                  Адрес доставки
+                </p>
+                <input
+                  type="text"
+                  className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
+                />
+                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
+                  Дата доставки
+                </p>
+                <input
+                  type="text"
+                  className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
+                />
+                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
                   E-mail
                 </p>
                 <input
                   type="text"
                   className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
                 />
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] mt-[20px] font-medium">
-                  Ваш отзыв
-                </p>
-                <textarea className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3" />
                 <div className="hidden custom:flex justify-end mt-[20px] custom:mt-[60px] relative">
                   {error && (
                     <p className="text-red-500 top-[-40px] absolute">{error}</p>
@@ -367,25 +385,32 @@ export const Reviews = () => {
                     Отправить
                   </button>
                 </div>
+                <p className="font-['HelveticaNeueCyrr'] text-[18px] text-center mt-2 mx-auto custom:hidden flex w-[70%] custom:w-[30%] custom:ml-[5%] text-[12px]">
+                  В течении 24 часов на вашу почту придет ответ с рассчетом
+                  доставки до вашего адреса!
+                </p>
+                <div className="custom:hidden flex justify-center mt-[40px] custom:mt-[60px] relative">
+                  {error && (
+                    <p className="text-red-500 top-[-40px] absolute">{error}</p>
+                  )}
+                  {alert && (
+                    <p className="text-green-400 top-[-40px] absolute">
+                      {alert}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="bg-[#C5364B] py-2 px-4 rounded-full text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+                  >
+                    Отправить
+                  </button>
+                </div>
               </form>
-              <p className="font-['HelveticaNeueCyrr'] text-[13px] text-center flex w-[220px] custom:w-[220px] custom:ml-[5%]">
-                Мы с нетерпением ждем от Вас обратной связи и обязательно
-                разместим ваш отзыв на нашем сайте!
+              <p className="text-center mx-auto hidden custom:flex w-[70%] custom:w-[30%] custom:ml-[5%] text-[12px]">
+                В течении 24 часов на вашу почту придет ответ с рассчетом
+                доставки до вашего адреса!
               </p>
-              <div className="custom:hidden flex justify-center mt-[20px] custom:mt-[60px] relative">
-                {error && (
-                  <p className="text-red-500 top-[-40px] absolute">{error}</p>
-                )}
-                {alert && (
-                  <p className="text-green-400 top-[-40px] absolute">{alert}</p>
-                )}
-                <button
-                  type="submit"
-                  className="bg-[#C5364B] py-2 px-4 rounded-full text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
-                >
-                  Отправить
-                </button>
-              </div>
             </div>
           </div>
         </div>
