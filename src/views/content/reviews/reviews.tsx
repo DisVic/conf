@@ -25,7 +25,7 @@ export const Reviews = () => {
 
   return (
     <>
-      <div className="bg-white h-auto mobile:hidden">
+      <div className="bg-white h-auto mobile:hidden ">
         <div className="3xl:hidden custom:block hidden z-0">
           <img
             src="/bg/2.png"
@@ -168,7 +168,7 @@ export const Reviews = () => {
         </div>
       </div>
 
-      <div className="bg-white h-auto nemobile:hidden overflow-none">
+      <div className="bg-white h-auto nemobile:hidden ">
         <div className="3xl:hidden  mobile:block hidden z-0">
           <img
             src="/bg/2.png"
@@ -418,7 +418,7 @@ export const Reviews = () => {
                   8 999 765 65 65
                 </p>
 
-                <div className="flex items-center gap-2 mt-1 ml-[100px]">
+                <div className="flex items-center gap-2 mt-1 ml-[77px]">
                   <img
                     src="/instagram.svg"
                     alt="instagram"
@@ -429,7 +429,7 @@ export const Reviews = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-1 ml-[100px]">
+                <div className="flex items-center gap-2 mt-1 ml-[77px]">
                   <img
                     src="/tg.svg"
                     alt="tg"
@@ -440,7 +440,7 @@ export const Reviews = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-1 ml-[100px]">
+                <div className="flex items-center gap-2 mt-1 ml-[77px]">
                   <img
                     src="/vk.svg"
                     alt="vk"

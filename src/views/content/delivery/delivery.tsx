@@ -58,7 +58,7 @@ export const Delivery = () => {
                   Узнать стоимость доставки
                   <span className="font-['HelveticaNeueCyrb']"> бесплатно</span>
                 </h1>
-                <p className="font-['HelveticaNeueCyr'] text-[18px] mobile:text-[13px]  mobile:mr-4 mobile:w-[400px] font-light mx-auto mt-5  max-custom:w-2/3 w-[580px]">
+                <p className="font-['HelveticaNeueCyr'] text-[18px] mobile:text-[13px]  mobile:mr-4 mobile:w-[350px] font-light mx-auto mt-5  max-custom:w-2/3 w-[580px]">
                   Нажмите на кнопку “Рассчитать” и заполните свой адрес, почту,
                   способ достаки и желаему. дату доставки. В течении 24 часов мы
                   отправим вам ответ на вашу посту!
@@ -198,7 +198,7 @@ export const Delivery = () => {
                   8 999 765 65 65
                 </p>
 
-                <div className="flex items-center gap-2 mt-1 ml-[100px]">
+                <div className="flex items-center gap-2 mt-1 ml-[77px]">
                   <img
                     src="/instagram.svg"
                     alt="instagram"
@@ -209,7 +209,7 @@ export const Delivery = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-1 ml-[100px]">
+                <div className="flex items-center gap-2 mt-1 ml-[77px]">
                   <img
                     src="/tg.svg"
                     alt="tg"
@@ -220,7 +220,7 @@ export const Delivery = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-1 ml-[100px]">
+                <div className="flex items-center gap-2 mt-1 ml-[77px]">
                   <img
                     src="/vk.svg"
                     alt="vk"
