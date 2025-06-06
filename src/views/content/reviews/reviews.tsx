@@ -235,11 +235,13 @@ export const Reviews = () => {
             </div>
           </div>
 
-          <div className="mt-5  flex flex-col  mobile:flex-row items-center justify-start  mobile:justify-end w-[100%] ml-auto">
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[82px] h-[82px] rounded-full overflow-hidden  mobile:hidden">
+          <div className="mt-5 flex flex-col mobile:flex-row items-center justify-start mobile:justify-end w-[100%] ml-auto">
+            {/* Удаляем дублирующий элемент для мобильных */}
+            <div className=" fixed  top-[25%]  transition-transform duration-300 ease-in-out hover:scale-[1.2] mobile:w-[82px] mobile:h-[82px] rounded-full overflow-hidden order-1 mobile:order-2">
+              {" "}
               <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[2px]">
                 <div
-                  className="w-full h-full rounded-full "
+                  className="w-full h-full rounded-full"
                   style={{
                     backgroundImage: "url(/image2.jpg)",
                     backgroundPosition: "30% center",
@@ -248,8 +250,9 @@ export const Reviews = () => {
                 ></div>
               </div>
             </div>
-            <div className=" text-center  mobile:text-left justify-items-center  mobile:justify-items-end">
-              <div className="w-[314px]  mobile:justify-items-start">
+
+            <div className="text-center mobile:text-left justify-items-center mobile:justify-items-end order-2 mobile:order-1">
+              <div className="w-[314px] mobile:justify-items-start">
                 <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
                   Владимир Виллович В.
                 </h1>
@@ -265,18 +268,6 @@ export const Reviews = () => {
                 Поставил 5 звезд за оперативну доставку, вежливый персонал и
                 безумно вкусные и свежие десерты!
               </p>
-            </div>
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] w-[82px] aspect-square rounded-full overflow-hidden mobile:inline-block mobile:w-[40px] mobile:h-[40px]">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[2px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image2.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
             </div>
           </div>
           <div className=" gap-5 flex flex-col  mobile:flex-row items-center justify-start  mobile:justify-start w-[100%] mt-5">
