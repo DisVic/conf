@@ -28,7 +28,7 @@ export const Delivery = () => {
         <div className="bg-[#FF8F8F]  pb-[20px] mobile:px-20 justify-center flex ">
           <div className="max-w-[1234px] custom:mx-[5%] mt-[20px]">
             <h1
-              className="justify-center font-[fontsDrops] text-[48px] mobile:text-[40px]  flex"
+              className="justify-center font-[fontsDrops] text-[48px] mobile:text-[40px]  flex mt-[150px] mb-[30px] mobile:mt-0"
               style={{
                 textShadow: "0 4px 8px rgba(0, 0, 0, 0.6)",
               }}
@@ -198,7 +198,7 @@ export const Delivery = () => {
                   8 999 765 65 65
                 </p>
 
-                <div className="flex items-center gap-2 mt-1 ml-[77px]">
+                <div className="flex items-center gap-2 mt-1 ml-[65px]">
                   <img
                     src="/instagram.svg"
                     alt="instagram"
@@ -209,7 +209,7 @@ export const Delivery = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-1 ml-[77px]">
+                <div className="flex items-center gap-2 mt-1 ml-[65px]">
                   <img
                     src="/tg.svg"
                     alt="tg"
@@ -220,7 +220,7 @@ export const Delivery = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 mt-1 ml-[77px]">
+                <div className="flex items-center gap-2 mt-1 ml-[65px]">
                   <img
                     src="/vk.svg"
                     alt="vk"

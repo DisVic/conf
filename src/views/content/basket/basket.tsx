@@ -69,7 +69,7 @@ export const Basket = () => {
                   </div>
                   <button
                     onClick={() => removeFromCart(item.name)}
-                    className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                    className="text-red-500 hover:text-red-700 transition-colors duration-200 items-align-[right] ml-auto"
                   >
                     ✖️
                   </button>
@@ -90,29 +90,29 @@ export const Basket = () => {
             )}
           </div>
           <div className="bg-[#ECDADA] w-4/5 custom:w-2/5 px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px] gap-5">
-            <p className="text-[16px] font-medium">
+            <p className="text-[16px] font-medium font-['HelveticaNeueCyrr']">
               Адрес доставки
               <span className="font-light text-[#5e5757]"> (по умолчанию)</span>
             </p>
-            <p className="text-[16px] font-normal text-[#5e5757] mt-3">
+            <p className="text-[16px] font-normal text-[#5e5757] mt-3 font-['HelveticaNeueCyr']">
               г. Москва, ул. 800-летия Москвы, д. 28к1
             </p>
-            <p className="text-[16px] font-normal mt-3">22-28 апреля</p>
+            <p className="text-[16px] font-normal mt-3 font-['HelveticaNeueCyr']">22-28 апреля</p>
             <div className="text-[16px] font-normal text-[#5e5757] mt-8">
               <div className="flex flex-row items-center justify-between">
-                <p>Товары, {cartItems.length} шт.</p>
-                <p>{calculateTotal()} рублей</p>
+                <p className="font-['HelveticaNeueCyr']">Товары, {cartItems.length} шт.</p>
+                <p className="font-['HelveticaNeueCyr']">{calculateTotal()} рублей</p>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[24px] font-medium mt-8">
-              <p>Итого</p>
-              <p>{calculateTotal()} рублей</p>
+              <p className="text-[24px] font-['HelveticaNeueCyrb']">Итого</p>
+              <p className="text-[24px] font-['HelveticaNeueCyrb']">{calculateTotal()} рублей</p>
             </div>
 
             <div className="mt-3 flex flex-row items-center gap-3">
               <input type="checkbox" className="bg-white" />
-              <p className="text-[12px] font-light text-[#5e5757]">
+              <p className="text-[12px] font-['HelveticaNeueCyr'] font-light text-[#5e5757]">
                 Соглашаюсь с правилами пользования торговой площадкой и
                 условиями доставки
               </p>
@@ -120,7 +120,7 @@ export const Basket = () => {
             <div
               onClick={() => setIsModalOpen(true)}
               className="bg-[#C5364B] flex rounded-full mx-auto
-                  py-3 w-[40%] custom:w-[200px] mt-[30px]
+                  py-3 w-[129] custom:w-[200px] mt-[30px]
         text-white  justify-center transition-transform duration-300 ease-in-out shadow-md shadow-[#C5364B]
              hover:scale-105 hover:shadow-lg hover:shadow-[#C5364B] hover:cursor-pointer cursor-pointer"
             >
@@ -229,7 +229,7 @@ export const Basket = () => {
           8 999 765 65 65
         </p>
 
-        <div className="flex items-center gap-2 mt-1 ml-[100px]">
+        <div className="flex items-center gap-2 mt-1 ml-[25%]">
           <img
             src="/instagram.svg"
             alt="instagram"
@@ -240,7 +240,7 @@ export const Basket = () => {
           </span>
         </div>
 
-        <div className="flex items-center gap-2 mt-1 ml-[100px]">
+        <div className="flex items-center gap-2 mt-1 ml-[25%]">
           <img
             src="/tg.svg"
             alt="tg"
@@ -251,7 +251,7 @@ export const Basket = () => {
           </span>
         </div>
 
-        <div className="flex items-center gap-2 mt-1 ml-[100px]">
+        <div className="flex items-center gap-2 mt-1 ml-[25%]">
           <img
             src="/vk.svg"
             alt="vk"

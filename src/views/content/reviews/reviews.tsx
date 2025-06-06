@@ -181,17 +181,17 @@ export const Reviews = () => {
           <img
             src="/bg/2.png"
             alt=""
-            className="absolute  mobile:w-[25%]  mobile:top-[20%]  mobile:right-[80%]"
+            className="absolute  mobile:w-[25%]  mobile:top-[27%]  mobile:right-[80%]"
           />
           <img
             src="/bg/6.png"
             alt=""
-            className="absolute  mobile:w-[35%]  mobile:top-[36%]  mobile:right-[-48px]"
+            className="absolute  mobile:w-[35%]  mobile:top-[47%]  mobile:right-[-48px]"
           />
           <img
             src="/bg/5.png"
             alt=""
-            className="absolute  mobile:w-[25%]  mobile:top-[50%]  mobile:right-[80%]"
+            className="absolute  mobile:w-[25%]  mobile:top-[65%]  mobile:right-[80%]"
           />
         </div>
 
@@ -266,7 +266,7 @@ export const Reviews = () => {
                 безумно вкусные и свежие десерты!
               </p>
             </div>
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] hidden w-[82px] h-[82px] rounded-full overflow-hidden   mobile:inline-block">
+            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] w-[82px] aspect-square rounded-full overflow-hidden mobile:inline-block mobile:w-[40px] mobile:h-[40px]">
               <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[2px]">
                 <div
                   className="w-full h-full rounded-full"

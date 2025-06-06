@@ -40,19 +40,19 @@ const sliderData = [
         image: "/menu2.jpg",
       },
       {
-        name: "Вафли Ягодный микс",
+        name: "Торт Нежный",
         price: "899",
         description: "Вкус позднего лета с нежным шоколадом",
         image: "/menu3.jpg",
       },
       {
-        name: "Пончики Классические",
+        name: "Торт свежий день",
         price: "1199",
         description: "Вкус позднего лета с нежным шоколадом",
         image: "/menu4.jpg",
       },
       {
-        name: "Конфеты Орешик",
+        name: "Торт многоуровневый",
         price: "1599",
         description: "Вкус позднего лета с нежным шоколадом",
         image: "/menu5.jpg",
@@ -60,31 +60,93 @@ const sliderData = [
     ],
   },
   {
-    title: "Не торт",
+    title: "Пироженные",
     data: [
       {
-        name: "Бенто торт Birthday",
+        name: "Пироженное Август",
+        price: "799",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu2.jpg",
+      },
+      {
+        name: "Мини кейки",
+        price: "799",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu3.jpg",
+      },
+      {
+        name: "Черничный рай",
+        price: "1199",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu4.jpg",
+      },
+    ],
+  },
+  {
+    title: "Конфеты",
+    data: [
+      {
+        name: "Ореховое ассорти",
         price: "999",
         description: "Вкус позднего лета с нежным шоколадом",
         image: "/menu2.jpg",
       },
       {
-        name: "Вафли Ягодный микс",
+        name: "Ягодное ассорти",
+        price: "999",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu3.jpg",
+      },
+    ],
+  },
+  {
+    title: "Вафли",
+    data: [
+      {
+        name: "Вафли с пастой",
+        price: "799",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu2.jpg",
+      },
+      {
+        name: "Вафли с мороженным",
         price: "899",
         description: "Вкус позднего лета с нежным шоколадом",
         image: "/menu3.jpg",
       },
+    ],
+  },
+  {
+    title: "Пончики",
+    data: [
       {
-        name: "Пончики Классические",
-        price: "1199",
+        name: "Ассорти",
+        price: "799",
         description: "Вкус позднего лета с нежным шоколадом",
-        image: "/menu4.jpg",
+        image: "/menu2.jpg",
       },
       {
-        name: "Конфеты Орешик",
-        price: "1599",
+        name: "Сердца",
+        price: "999",
         description: "Вкус позднего лета с нежным шоколадом",
-        image: "/menu5.jpg",
+        image: "/menu3.jpg",
+      },
+    ],
+  },
+  {
+    title: "Интересное",
+    data: [
+      {
+        name: "Замок 3 м",
+        price: "799",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu2.jpg",
+      },
+      {
+        name: "Мастер класс",
+        price: "4 999 ",
+        description: "Вкус позднего лета с нежным шоколадом",
+        image: "/menu3.jpg",
       },
     ],
   },
@@ -172,26 +234,26 @@ export const MenuPage = () => {
           <div className="w-full space-y-10">
             {sliderData.map((category, index) => (
               <div key={index}>
-                <h2 className="text-[32px] font-['HelveticaNeueCyr'] font-bold mb-4">
+                <h2 className="text-[36px] font-['HelveticaNeueCyrb'] font-bold mb-4 ml-11">
                   {category.title}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-6 gap-x-[0px]">
                   {category.data.map((item, i) => (
                     <div
                       key={i}
-                      className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] max-w-[250px] mx-auto flex flex-col h-full"
+                      className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] w-[277px] mx-auto flex flex-col h-full h-[348px] "
                     >
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-full rounded-t-[45px] h-[175px]"
+                        className="w-full rounded-t-[45px] h-[202px]"
                       />
                       <div className="px-3 py-2 flex-grow">
                         <div className="flex flex-row justify-between text-[15px]">
                           <p className="font-bold font-[Choplin] text-[15px]">
                             {item.name}
                           </p>
-                          <p className="font-light">от {item.price}р</p>
+                          <p className="font-light font-[Choplin] text-[15px]">от {item.price}р</p>
                         </div>
                         <p className="text-[11px] font-light w-3/4">
                           {item.description}
@@ -235,7 +297,7 @@ export const MenuPage = () => {
           <div className="w-full space-y-10">
             {sliderData.map((category, index) => (
               <div key={index}>
-                <h2 className="text-[30px] font-['HelveticaNeueCyr'] font-bold mb-4">
+                <h2 className="text-[30px] font-['HelveticaNeueCyrb'] font-bold mb-4 ml-10">
                   {category.title}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-5">
@@ -255,7 +317,7 @@ export const MenuPage = () => {
                             {item.name}
                           </p>
                         </div>
-                        <p className="text-[13px] font-light w-3/4">
+                        <p className="font-['Choplin'] text-[13px] font-light w-3/4">
                           от {item.price}р
                         </p>
                       </div>

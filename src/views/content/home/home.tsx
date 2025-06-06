@@ -186,9 +186,8 @@ export const Home = () => {
                       setIsPressed(!isPressed);
                       addToCart("Десерт 1", 1399);
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${
-                      isPressed ? "bg-[green]" : "bg-black"
-                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${isPressed ? "bg-[green]" : "bg-black"
+                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -215,9 +214,8 @@ export const Home = () => {
                       setIsPressedtr(!isPressedtr);
                       addToCart("Десерт 2", 1399);
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${
-                      isPressedtr ? "bg-[green]" : "bg-black"
-                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${isPressedtr ? "bg-[green]" : "bg-black"
+                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -244,9 +242,8 @@ export const Home = () => {
                       setIsPresseddv(!isPresseddv);
                       addToCart("Десерт 3", 1399);
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${
-                      isPresseddv ? "bg-[green]" : "bg-black"
-                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${isPresseddv ? "bg-[green]" : "bg-black"
+                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -273,9 +270,8 @@ export const Home = () => {
                       setIsPressedch(!isPressedch);
                       addToCart("Десерт 4", 1399);
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${
-                      isPressedch ? "bg-[green]" : "bg-black"
-                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${isPressedch ? "bg-[green]" : "bg-black"
+                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -379,7 +375,7 @@ export const Home = () => {
         </h1>
 
         <div className="flex flex-col items-center mobile:flex-row justify-between">
-          <div className="w-2/3 mobile:w-[28%] mt-[110px] -ml-[10%] mobile:mr-0 mobile:mb-[-30px]">
+          <div className="w-2/3 mobile:w-[99px] mt-[110px] -ml-[10px] mobile:mr-0 mobile:mb-[20px]">
             <h1 className="mb-3 font-['Calliga'] text-[20px]">Tasty</h1>
             <p className="font-['HelveticaNeueCyr'] text-[13px] max-w-[90%]">
               Мы тщательно проверяем вкус нашего изделия, чтобы угодить каждому
@@ -400,7 +396,7 @@ export const Home = () => {
             </div>
           </div>
 
-          <div className="w-2/3 mobile:w-[25%] my-auto ml-auto mobile:ml-[-20px] max-custom:text-right mt-[10px]">
+          <div className="w-2/3 mobile:w-[112px] my-auto ml-auto mobile:ml-[-20px] max-custom:text-right mt-[60px]">
             <h1 className="mb-3 font-['Calliga'] text-[20px]">Fresh</h1>
             <p className="font-['HelveticaNeueCyr'] text-[13px]">
               Мы используем свежие продукты для безопасности наших покупателей!
@@ -497,6 +493,43 @@ export const Home = () => {
       </div>
 
       <div className="bg-cover bg-no-repeat nemobile:hidden">
+        <div className="3xl:hidden  mobile:block hidden z-0">
+          <img
+            src="/bg/8.png"
+            alt=""
+            className="absolute  mobile:w-[145px] mobile:h-[127px]  mobile:top-[-75px]  mobile:right-[140px]"
+          />
+          <img
+            src="/bg/3.png"
+            alt=""
+            className="absolute  mobile:w-[197px] mobile:h-[143px]  mobile:top-[185px]  mobile:left-[-100px]"
+          />
+          <img
+            src="/bg/7.png"
+            alt=""
+            className="absolute  mobile:w-[89px] mobile:h-[98px] mobile:top-[11%]  mobile:left-[85%]"
+          />
+          <img
+            src="/bg/1.png"
+            alt=""
+            className="absolute  mobile:w-[134px] mobile:h-[86px] mobile:top-[64%]  mobile:left-[78%]"
+          />
+          <img
+            src="/bg/3.png"
+            alt=""
+            className="absolute  mobile:w-[197px] mobile:h-[143px]  mobile:top-[165%]  mobile:left-[-100px]"
+          />
+          <img
+            src="/bg/7.png"
+            alt=""
+            className="absolute  mobile:w-[140px] mobile:h-[153px] mobile:top-[194%]  mobile:left-[85%]"
+          />
+          <img
+            src="/bg/8.png"
+            alt=""
+            className="absolute  mobile:w-[122px] mobile:h-[106px]  mobile:top-[376%]  mobile:right-[85%]"
+          />
+        </div>
         <img src="/bgtop.png" alt="bg" className="w-full z-10" />
         <div className="bg-[#FF8F8F] pt-[20px] pb-[20px] justify-center flex">
           <div className="max-w-[240px]  mx-[5%]">
