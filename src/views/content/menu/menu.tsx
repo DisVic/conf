@@ -231,7 +231,7 @@ export const MenuPage = () => {
           Menu
         </h1>
         <div className="flex flex-col items-start custom:flex-row mt-4 w-full">
-          <div className="w-full space-y-10">
+          <div className="w-full space-y-10 w">
             {sliderData.map((category, index) => (
               <div key={index}>
                 <h2 className="text-[36px] font-['HelveticaNeueCyrb'] font-bold mb-4 ml-11">
@@ -241,7 +241,7 @@ export const MenuPage = () => {
                   {category.data.map((item, i) => (
                     <div
                       key={i}
-                      className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] w-[277px] mx-auto flex flex-col h-full h-[348px] "
+                      className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] w-[280px] mx-auto flex flex-col h-full h-[348px] "
                     >
                       <img
                         src={item.image}

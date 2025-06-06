@@ -44,16 +44,8 @@ export const Delivery = () => {
               оперативно обработают ваш запрос и помогут решить любую проблему!{" "}
             </p>
             <div className="flex flex-col items-center custom:flex-row justify-center gap-10">
-              <div className="mt-10">
-                <img
-                  src="/planet.png"
-                  alt="planet"
-                  className="custom:max-w-[300px] custom:min-w-[300px] 
-                  transition-transform duration-300 ease-in-out hover:scale-[1.2]
-                  custom:h-[300px] max-w-[200px] min-w-[200px]  h-[200px] flex custom:ml-auto custom:mr-10"
-                />
-              </div>
-              <div className="custom:w-[40%] w-[90%] mt-10">
+              
+              <div className="custom:w-[70%] w-[90%] mt-10 text-center">
                 <h1 className="font-['HelveticaNeueCyrr'] mobile:text-[20px]  mobile:w-[300px] text-[40px] font-normal max-custom:text-center">
                   Узнать стоимость доставки
                   <span className="font-['HelveticaNeueCyrb']"> бесплатно</span>
@@ -65,7 +57,7 @@ export const Delivery = () => {
                 </p>
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-[#C5364B] flex rounded-full mx-auto custom:mx-0
+                  className="bg-[#C5364B] flex rounded-full mx-auto custom:mx-45
                   py-3 w-[35%] mt-[30px] mobile:w-[200px]
         text-white  justify-center transition-transform duration-300 ease-in-out shadow-md shadow-[#C5364B]
              hover:scale-105 hover:shadow-lg hover:shadow-[#C5364B]"

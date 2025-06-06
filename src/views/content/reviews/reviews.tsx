@@ -239,16 +239,7 @@ export const Reviews = () => {
             {/* Удаляем дублирующий элемент для мобильных */}
             <div className=" fixed  top-[25%]  transition-transform duration-300 ease-in-out hover:scale-[1.2] mobile:w-[82px] mobile:h-[82px] rounded-full overflow-hidden order-1 mobile:order-2">
               {" "}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[2px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image2.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
+              
             </div>
 
             <div className="text-center mobile:text-left justify-items-center mobile:justify-items-end order-2 mobile:order-1">
@@ -317,7 +308,7 @@ export const Reviews = () => {
           <div className="bg-[#fff] w-[90%] lg:w-2/4 px-[20px] sm:px-[50px] py-10 border-[#FECFCF] border-[1px] rounded-[29px] text-left">
             <div className="flex flex-row items-center justify-between relative">
               <h2 className="font-['HelveticaNeueCyrr'] custom:text-[24px] text-[18px] font-medium text-center">
-                Заполните анкету, чтобы рассчитать стоимость доставки
+                Заполните анкету, чтобы оставить отзыв
               </h2>
               <button
                 onClick={() => {
@@ -338,21 +329,7 @@ export const Reviews = () => {
                 <input
                   type="text"
                   className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
-                />
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
-                  Адрес доставки
-                </p>
-                <input
-                  type="text"
-                  className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
-                />
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
-                  Дата доставки
-                </p>
-                <input
-                  type="text"
-                  className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
-                />
+                />            
                 <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
                   E-mail
                 </p>
@@ -360,6 +337,11 @@ export const Reviews = () => {
                   type="text"
                   className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
                 />
+                <p className="font-['HelveticaNeueCyrr'] custom:text-[18px] text-[12px] mt-[10px] custon:mt-[20px] font-medium">
+                  Ваш отзыв
+                </p>
+                <textarea className="w-full bg-[#FF8F8F33] custom:bg-[#FF8F8F33] rounded-3xl px-5 py-5 mt-3 h-[130px]" />
+
                 <div className="hidden custom:flex justify-end mt-[20px] custom:mt-[60px] relative">
                   {error && (
                     <p className="text-red-500 top-[-40px] absolute">{error}</p>
@@ -371,14 +353,13 @@ export const Reviews = () => {
                   )}
                   <button
                     type="submit"
-                    className="bg-[#C5364B] py-2 px-4 rounded-full text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+                    className="bg-[#C5364B] py-3 px-8 rounded-full text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg "
                   >
                     Отправить
                   </button>
                 </div>
                 <p className="font-['HelveticaNeueCyrr'] text-[18px] text-center mt-2 mx-auto custom:hidden flex w-[70%] custom:w-[30%] custom:ml-[5%] text-[12px]">
-                  В течении 24 часов на вашу почту придет ответ с рассчетом
-                  доставки до вашего адреса!
+                  Мы с нетерпением ждем от Вас обратной связи и обязательно разместим ваш отзыв на нашем сайте!
                 </p>
                 <div className="custom:hidden flex justify-center mt-[40px] custom:mt-[60px] relative">
                   {error && (
@@ -399,8 +380,7 @@ export const Reviews = () => {
                 </div>
               </form>
               <p className="text-center mx-auto hidden custom:flex w-[70%] custom:w-[30%] custom:ml-[5%] text-[12px]">
-                В течении 24 часов на вашу почту придет ответ с рассчетом
-                доставки до вашего адреса!
+                Мы с нетерпением ждем от Вас обратной связи и обязательно разместим ваш отзыв на нашем сайте!
               </p>
             </div>
           </div>
