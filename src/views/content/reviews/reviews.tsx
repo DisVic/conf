@@ -2,22 +2,89 @@ import { useEffect, useState } from "react";
 import { Footer } from "../../components/layout/footer";
 import { useNavigate } from "react-router-dom";
 
+interface Review {
+  id: number;
+  name: string;
+  rating: number;
+  text: string;
+}
+
 export const Reviews = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [alert, setAlert] = useState<string>("");
+  const [reviews, setReviews] = useState<Review[]>([
+    {
+      id: 1,
+      name: "Вячеслав Васильевич В.",
+      rating: 5,
+      text: "Одна из лучших кондитерских! Быстрая и удобная доставка! Вкус изделий уникален и прекрасен! Заказывайте не пожалеете"
+    },
+    {
+      id: 2,
+      name: "Владимир Виллович В.",
+      rating: 5,
+      text: "Поставил 5 звезд за оперативну доставку, вежливый персонал и безумно вкусные и свежие десерты!"
+    },
+    {
+      id: 3,
+      name: "Виктория Викторовна В.",
+      rating: 5,
+      text: "Уже не первый раз заказываю тут торт на день рождения! Все нравится! Закажу еще!"
+    }
+  ]);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    text: "",
+    rating: 5
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleRatingChange = (rating: number) => {
+    setFormData(prev => ({
+      ...prev,
+      rating
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTimeout(() => {
-      navigate("/main");
-      window.location.reload();
-    }, 1e3);
+    
+    if (!formData.name || !formData.text) {
+      setError("Пожалуйста, заполните все обязательные поля");
+      return;
+    }
+
+    const newReview: Review = {
+      id: reviews.length + 1,
+      name: formData.name,
+      rating: formData.rating,
+      text: formData.text
+    };
+
+    setReviews([...reviews, newReview]);
     setAlert("Отзыв отправлен!");
+    setFormData({
+      name: "",
+      email: "",
+      text: "",
+      rating: 5
+    });
+    
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   const navigate = useNavigate();
-
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1000);
 
   const handleResize = () => {
@@ -31,8 +98,73 @@ export const Reviews = () => {
     };
   }, []);
 
+  const renderStars = (rating: number) => {
+    return Array(5).fill(0).map((_, i) => (
+      <img 
+        key={i} 
+        src="/star.png" 
+        alt="" 
+        className="w-[20px] h-[20px]" 
+      />
+    ));
+  };
+
+  const renderReview = (review: Review, index: number) => {
+    const isEven = index % 2 !== 0;
+    
+    return (
+      <div 
+        key={review.id} 
+        className={`gap-5 flex flex-col custom:flex-row items-center justify-start ${isEven ? 'custom:justify-end' : 'custom:justify-start'} w-[100%] mt-5`}
+      >
+        {(!isEven || isMobile) && (
+          <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[200px] h-[200px] rounded-full overflow-hidden">
+            <div className={`absolute inset-0 rounded-full bg-gradient-to-${isEven ? 'l' : 'r'} from-[#C5364B] to-[#FFF] p-[10px]`}>
+              <div
+                className="w-full h-full rounded-full"
+                style={{
+                  backgroundImage: `url(${review.avatar})`,
+                  backgroundPosition: "30% center",
+                  backgroundSize: "cover",
+                }}
+              ></div>
+            </div>
+          </div>
+        )}
+        
+        <div className={`gap-3 text-center custom:text-left ${isEven ? 'custom:ml-auto' : ''}`}>
+          <div className={isEven ? "w-[314px] custom:justify-items-start" : ""}>
+            <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">{review.name}</h1>
+            <div className="flex flex-row justify-center custom:justify-start">
+              {renderStars(review.rating)}
+            </div>
+          </div>
+          <p className={`font-['HelveticaNeueCyr'] ${isEven ? 'w-[314px]' : 'w-[300px]'} text-[18px] ${isEven ? 'custom:ml-auto' : ''} text-left`}>
+            {review.text}
+          </p>
+        </div>
+        
+        {isEven && !isMobile && (
+          <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] hidden w-[200px] h-[200px] rounded-full overflow-hidden custom:inline-block">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[10px]">
+              <div
+                className="w-full h-full rounded-full"
+                style={{
+                  backgroundImage: `url(${review.avatar})`,
+                  backgroundPosition: "30% center",
+                  backgroundSize: "cover",
+                }}
+              ></div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <>
+      
       <div className="bg-white h-auto mobile:hidden ">
         <div className="3xl:hidden custom:block hidden z-0">
           <img
@@ -60,110 +192,9 @@ export const Reviews = () => {
           >
             Customer Reviews
           </h1>
-          <div className="gap-5 flex flex-col custom:flex-row items-center justify-start custom:justify-start w-[100%] mt-5">
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[200px] h-[200px] rounded-full overflow-hidden">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#C5364B] to-[#FFF] p-[10px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
-            </div>
-            <div className="gap-3 text-center custom:text-left justify-items-center custom:justify-items-start">
-              <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
-                Вячеслав Васильевич В.
-              </h1>
-              <div className="flex flex-row">
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-              </div>
-              <p className="font-['HelveticaNeueCyr'] w-1/3 text-[18px]">
-                Одна из лучших кондитерских! Быстрая и удобная доставка! Вкус
-                изделий уникален и прекрасен! Заказывайте не пожалеете
-              </p>
-            </div>
-          </div>
-          <div className="gap-5 flex flex-col custom:flex-row items-center justify-start custom:justify-end w-[100%] ml-auto mt-1">
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[200px] h-[200px] rounded-full overflow-hidden custom:hidden">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[10px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image2.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
-            </div>
-            <div className="gap-3 text-center custom:text-left justify-items-center custom:justify-items-end">
-              <div className="w-[314px] custom:justify-items-start">
-                <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
-                  Владимир Виллович В.
-                </h1>
-                <div className="flex flex-row">
-                  <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                  <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                  <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                  <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                  <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                </div>
-              </div>
-              <p className="font-['HelveticaNeueCyr'] w-[314px] text-[18px] custom:ml-auto text-left">
-                Поставил 5 звезд за оперативну доставку, вежливый персонал и
-                безумно вкусные и свежие десерты!
-              </p>
-            </div>
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] hidden w-[200px] h-[200px] rounded-full overflow-hidden custom:inline-block">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-l from-[#C5364B] to-[#FFF] p-[10px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image2.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="gap-5 flex flex-col custom:flex-row items-center justify-start custom:justify-start w-[100%] mt-1">
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[200px] h-[200px] rounded-full overflow-hidden">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#C5364B] to-[#FFF] p-[10px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image3.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
-            </div>
-            <div className="gap-3 text-center custom:text-left justify-items-center custom:justify-items-start">
-              <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
-                Виктория Викторовна В.
-              </h1>
-              <div className="flex flex-row">
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-                <img src="/star.png" alt="" className="w-[20px] h-[20px]" />
-              </div>
-              <p className="font-['HelveticaNeueCyr'] w-[300px] text-[18px]">
-                Уже не первый раз заказываю тут торт на день рождения! Все
-                нравится! Закажу еще!
-              </p>
-            </div>
-          </div>
+          
+          {reviews.map((review, index) => renderReview(review, index))}
+          
           <div
             onClick={() => setIsModalOpen(true)}
             className="bg-[#C5364B] flex rounded-full mx-auto
@@ -176,139 +207,59 @@ export const Reviews = () => {
         </div>
       </div>
 
-      <div className="bg-white h-auto nemobile:hidden ">
-        <div className="3xl:hidden  mobile:block hidden z-0">
-          <img
-            src="/bg/2.png"
-            alt=""
-            className="absolute  mobile:w-[25%]  mobile:top-[27%]  mobile:right-[80%]"
-          />
-          <img
-            src="/bg/6.png"
-            alt=""
-            className="absolute  mobile:w-[35%]  mobile:top-[47%]  mobile:right-[-48px]"
-          />
-          <img
-            src="/bg/5.png"
-            alt=""
-            className="absolute  mobile:w-[25%]  mobile:top-[65%]  mobile:right-[80%]"
-          />
-        </div>
+      {/* Mobile Version (391px) */}
+      <div className="hidden mobile:block bg-white h-auto px-4 py-6">
+        <h1
+          className="text-center font-[fontsDrops] text-[32px] mb-6"
+          style={{
+            textShadow: "0 2px 4px rgba(0, 0, 0, 0.4)",
+          }}
+        >
+          Отзывы
+        </h1>
 
-        <div className="pt-[20px] pb-[20px] max-w-[1234px] mx-auto pl-4 mr-2 mobile:mt-[10px] mobile:mb-[10px]">
-          <h1
-            className="justify-center font-[fontsDrops] text-[48px] sm:text-[100px] flex"
-            style={{
-              textShadow: "0 4px 8px rgba(0, 0, 0, 0.6)",
-            }}
-          >
-            Customer Reviews
-          </h1>
-          <div className=" py-6 gap-5 flex flex-col mobile:flex-row items-center justify-start  mobile:justify-start w-[100%] mt-3">
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[82px] h-[82px] rounded-full overflow-hidden">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#C5364B] to-[#FFF] p-[2px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
-            </div>
-            <div className="gap-3 text-center  mobile:text-left justify-items-center  mobile:justify-items-start">
-              <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
-                Вячеслав Васильевич В.
-              </h1>
-              <div className="flex flex-row">
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-              </div>
-              <p className="font-['HelveticaNeueCyr'] w-[250px] text-[13px]">
-                Одна из лучших кондитерских! Быстрая и удобная доставка! Вкус
-                изделий уникален и прекрасен! Заказывайте не пожалеете
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-5 flex flex-col mobile:flex-row items-center justify-start mobile:justify-end w-[100%] ml-auto">
-            {/* Удаляем дублирующий элемент для мобильных */}
-            <div className=" fixed  top-[25%]  transition-transform duration-300 ease-in-out hover:scale-[1.2] mobile:w-[82px] mobile:h-[82px] rounded-full overflow-hidden order-1 mobile:order-2">
-              {" "}
-              
-            </div>
-
-            <div className="text-center mobile:text-left justify-items-center mobile:justify-items-end order-2 mobile:order-1">
-              <div className="w-[314px] mobile:justify-items-start">
-                <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
-                  Владимир Виллович В.
-                </h1>
-                <div className="flex flex-row">
-                  <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                  <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                  <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                  <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                  <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
+        <div className="space-y-8">
+          {reviews.map((review) => (
+            <div key={review.id} className="bg-[#FFF5F5] rounded-2xl p-4 shadow-md">
+              <div className="flex items-center mb-3">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#C5364B] to-[#FFF] p-1 mr-3">
+                  <div
+                    className="w-full h-full rounded-full bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url(/image${review.id}.jpg)`
+                    }}
+                  ></div>
+                </div>
+                <div>
+                  <h3 className="font-['HelveticaNeueCyrr'] text-[14px]">{review.name}</h3>
+                  <div className="flex">
+                    {renderStars(review.rating)}
+                  </div>
                 </div>
               </div>
-              <p className="font-['HelveticaNeueCyr'] w-[250px] text-[13px] mr-[62px] mobile:ml-auto text-left">
-                Поставил 5 звезд за оперативну доставку, вежливый персонал и
-                безумно вкусные и свежие десерты!
+              <p className="font-['HelveticaNeueCyr'] text-[14px]">
+                {review.text}
               </p>
             </div>
-          </div>
-          <div className=" gap-5 flex flex-col  mobile:flex-row items-center justify-start  mobile:justify-start w-[100%] mt-5">
-            <div className="relative transition-transform duration-300 ease-in-out hover:scale-[1.2] inline-block w-[82px] h-[82px] rounded-full overflow-hidden">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#C5364B] to-[#FFF] p-[2px]">
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundImage: "url(/image3.jpg)",
-                    backgroundPosition: "30% center",
-                    backgroundSize: "cover",
-                  }}
-                ></div>
-              </div>
-            </div>
-            <div className="gap-3 text-center  mobile:text-left justify-items-center  mobile:justify-items-start">
-              <h1 className="font-['HelveticaNeueCyrr'] text-[15px]">
-                Виктория Викторовна В.
-              </h1>
-              <div className="flex flex-row">
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-                <img src="/star.png" alt="" className="w-[15px] h-[15px]" />
-              </div>
-              <p className="font-['HelveticaNeueCyr'] w-[250px] text-[13px]">
-                Уже не первый раз заказываю тут торт на день рождения! Все
-                нравится! Закажу еще!
-              </p>
-            </div>
-          </div>
-          <div
-            onClick={() => setIsModalOpen(true)}
-            className="bg-[#C5364B] flex rounded-full mx-auto
-                  py-3 w-[40%]  mobile:w-[200px] mt-[30px]
-        text-white  justify-center transition-transform duration-300 ease-in-out shadow-md shadow-[#C5364B]
-             hover:scale-105 hover:shadow-lg hover:shadow-[#C5364B] hover:cursor-pointer cursor-pointer"
-          >
-            Оставить отзыв
-          </div>
+          ))}
+        </div>
+
+        <div
+          onClick={() => setIsModalOpen(true)}
+          className="bg-[#C5364B] rounded-full py-3 w-full max-w-[200px] mx-auto mt-8
+                text-white text-center transition-transform duration-300 ease-in-out 
+                shadow-md shadow-[#C5364B] hover:scale-105 hover:shadow-lg hover:shadow-[#C5364B]"
+        >
+          Оставить отзыв
         </div>
       </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-[999999999]">
-          <div className="bg-[#fff] w-[90%] lg:w-2/4 px-[20px] sm:px-[50px] py-10 border-[#FECFCF] border-[1px] rounded-[29px] text-left">
-            <div className="flex flex-row items-center justify-between relative">
-              <h2 className="font-['HelveticaNeueCyrr'] custom:text-[24px] text-[18px] font-medium text-center">
-                Заполните анкету, чтобы оставить отзыв
+          <div className="bg-[#fff] w-[90%] max-w-[500px] px-[20px] sm:px-[30px] py-8 border-[#FECFCF] border-[1px] rounded-[20px] text-left">
+            <div className="flex flex-row items-center justify-between mb-4">
+              <h2 className="font-['HelveticaNeueCyrr'] text-[18px] font-medium">
+                Оставить отзыв
               </h2>
               <button
                 onClick={() => {
@@ -316,73 +267,85 @@ export const Reviews = () => {
                   setAlert("");
                   setError("");
                 }}
-                className="text-[32px] text-[#5e5757] transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2]"
+                className="text-[28px] text-[#5e5757] hover:scale-[1.1]"
               >
                 ×
               </button>
             </div>
-            <div className="flex flex-col custom:flex-row items-center w-full">
-              <form className="custom:w-[60%] w-full" onSubmit={handleSubmit}>
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
-                  Имя и Фамилия
-                </p>
+            
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="font-['HelveticaNeueCyrr'] text-[14px] block mb-1">
+                  Имя и Фамилия*
+                </label>
                 <input
                   type="text"
-                  className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
-                />            
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] custom:text-[16px] mt-[10px] custom:mt-[20px] font-medium">
-                  E-mail
-                </p>
-                <input
-                  type="text"
-                  className="w-[100%] bg-[#ffe9e9] rounded-full px-5 py-2 mt-3"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full bg-[#ffe9e9] rounded-full px-4 py-2 text-[14px]"
+                  required
                 />
-                <p className="font-['HelveticaNeueCyrr'] custom:text-[18px] text-[12px] mt-[10px] custon:mt-[20px] font-medium">
-                  Ваш отзыв
-                </p>
-                <textarea className="w-full bg-[#FF8F8F33] custom:bg-[#FF8F8F33] rounded-3xl px-5 py-5 mt-3 h-[130px]" />
-
-                <div className="hidden custom:flex justify-end mt-[20px] custom:mt-[60px] relative">
-                  {error && (
-                    <p className="text-red-500 top-[-40px] absolute">{error}</p>
-                  )}
-                  {alert && (
-                    <p className="text-green-400 top-[-40px] absolute">
-                      {alert}
-                    </p>
-                  )}
-                  <button
-                    type="submit"
-                    className="bg-[#C5364B] py-3 px-8 rounded-full text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg "
-                  >
-                    Отправить
-                  </button>
+              </div>
+              
+              <div className="mb-4">
+                <label className="font-['HelveticaNeueCyrr'] text-[14px] block mb-1">
+                  E-mail
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full bg-[#ffe9e9] rounded-full px-4 py-2 text-[14px]"
+                />
+              </div>
+              
+              <div className="mb-4">
+                <label className="font-['HelveticaNeueCyrr'] text-[14px] block mb-1">
+                  Оценка
+                </label>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <img
+                      key={star}
+                      src={star <= formData.rating ? "/star.png" : "/star-empty.png"}
+                      alt=""
+                      className="w-5 h-5 cursor-pointer"
+                      onClick={() => handleRatingChange(star)}
+                    />
+                  ))}
                 </div>
-                <p className="font-['HelveticaNeueCyrr'] text-[18px] text-center mt-2 mx-auto custom:hidden flex w-[70%] custom:w-[30%] custom:ml-[5%] text-[12px]">
-                  Мы с нетерпением ждем от Вас обратной связи и обязательно разместим ваш отзыв на нашем сайте!
-                </p>
-                <div className="custom:hidden flex justify-center mt-[40px] custom:mt-[60px] relative">
-                  {error && (
-                    <p className="text-red-500 top-[-40px] absolute">{error}</p>
-                  )}
-                  {alert && (
-                    <p className="text-green-400 top-[-40px] absolute">
-                      {alert}
-                    </p>
-                  )}
-
-                  <button
-                    type="submit"
-                    className="bg-[#C5364B] py-2 px-4 rounded-full text-white transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
-                  >
-                    Отправить
-                  </button>
-                </div>
-              </form>
-              <p className="text-center mx-auto hidden custom:flex w-[70%] custom:w-[30%] custom:ml-[5%] text-[12px]">
-                Мы с нетерпением ждем от Вас обратной связи и обязательно разместим ваш отзыв на нашем сайте!
-              </p>
-            </div>
+              </div>
+              
+              <div className="mb-6">
+                <label className="font-['HelveticaNeueCyrr'] text-[14px] block mb-1">
+                  Ваш отзыв*
+                </label>
+                <textarea
+                  name="text"
+                  value={formData.text}
+                  onChange={handleInputChange}
+                  className="w-full bg-[#FF8F8F33] rounded-2xl px-4 py-3 h-[100px] text-[14px]"
+                  required
+                />
+              </div>
+              
+              {error && (
+                <p className="text-red-500 text-[14px] mb-3">{error}</p>
+              )}
+              {alert && (
+                <p className="text-green-500 text-[14px] mb-3">{alert}</p>
+              )}
+              
+              <button
+                type="submit"
+                className="bg-[#C5364B] w-full py-3 rounded-full text-white text-[16px] font-medium
+                      transition-transform duration-300 hover:scale-[1.02]"
+              >
+                Отправить
+              </button>
+            </form>
           </div>
         </div>
       )}

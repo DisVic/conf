@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
       (user: { login: string }) =>
         user.login === localStorage.getItem("loggedUser")
     );
-    setCartItems(loggedUser?.cart || []);
+    setCartItems(loggedUser?.cart || []); 
   }, [cartItems]);
 
   useEffect(() => {

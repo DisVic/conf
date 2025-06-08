@@ -7,6 +7,7 @@ import { MenuPage } from "../content/menu/menu.tsx";
 import { Delivery } from "../content/delivery/delivery.tsx";
 import { Reviews } from "../content/reviews/reviews.tsx";
 import { Contact } from "../content/contact/contact.tsx";
+import { ProductPage } from "../content/product/ProductPage.tsx";
 
 export const appRoutesDefinition: RouteObject[] = [
   {
@@ -48,6 +49,10 @@ export const appRoutesDefinition: RouteObject[] = [
       {
         path: "/reviews",
         element: <Reviews />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductPage />,
       },
     ],
   },

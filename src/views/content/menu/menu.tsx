@@ -7,6 +7,8 @@ import { Donut } from "../../../assets/donut";
 import { Interesting } from "../../../assets/interesting";
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/layout/footer";
+import { useProducts } from "../../../context/context";
+import { useNavigate } from "react-router-dom";
 
 const Menu: MenuItem[] = [
   { name: "Торт", color: "red", ico: Cake },
@@ -17,143 +19,12 @@ const Menu: MenuItem[] = [
   { name: "Интересное", color: "", ico: Interesting },
 ];
 
-const sliderData = [
-  {
-    title: "Торт",
-    data: [
-      {
-        name: "Торт детский",
-        price: "1 799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Detskiy.png",
-      },
-      {
-        name: "Торт Princess",
-        price: "2 799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/menu1.jpg",
-      },
-      {
-        name: "Бенто торт Birthday",
-        price: "999",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/menu2.jpg",
-      },
-      {
-        name: "Торт Нежный",
-        price: "899",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Nekniy.jpg",
-      },
-      {
-        name: "Торт свежий день",
-        price: "1 199",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/FreshDay.jpg",
-      },
-      {
-        name: "Торт многоуровневый",
-        price: "1 599",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/LayerCake.jpg",
-      },
-    ],
-  },
-  {
-    title: "Пироженные",
-    data: [
-      {
-        name: "Пироженное Август",
-        price: "799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/August.jpg",
-      },
-      {
-        name: "Мини кейки",
-        price: "799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Minicackes.jpg",
-      },
-      {
-        name: "Черничный рай",
-        price: "1 199",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Blueberrry.jpg",
-      },
-    ],
-  },
-  {
-    title: "Конфеты",
-    data: [
-      {
-        name: "Ореховое ассорти",
-        price: "999",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/NutsAssorti.png",
-      },
-      {
-        name: "Ягодное ассорти",
-        price: "999",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/YagodnoeAssorti.jpg",
-      },
-    ],
-  },
-  {
-    title: "Вафли",
-    data: [
-      {
-        name: "Вафли с пастой",
-        price: "799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/PasteWaffles.jpg",
-      },
-      {
-        name: "Вафли с мороженным",
-        price: "899",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/IceWaffles.png",
-      },
-    ],
-  },
-  {
-    title: "Пончики",
-    data: [
-      {
-        name: "Ассорти",
-        price: "799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Assorti.jpg",
-      },
-      {
-        name: "Сердца",
-        price: "999",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Hearts.jpg",
-      },
-    ],
-  },
-  {
-    title: "Интересное",
-    data: [
-      {
-        name: "Замок 3 м",
-        price: "799",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/3m.jpg",
-      },
-      {
-        name: "Мастер класс",
-        price: "4 999 ",
-        description: "Вкус позднего лета с нежным шоколадом",
-        image: "/Master.png",
-      },
-    ],
-  },
-];
+
 
 export const MenuPage = () => {
+  const { categories } = useProducts();
   const [menuItems, setMenuItems] = useState<MenuItem[]>(Menu);
+  const navigate = useNavigate();
   const toggleColor = (index: number) => {
     setMenuItems((prevItems) =>
       prevItems.map((item, i) => {
@@ -232,7 +103,7 @@ export const MenuPage = () => {
         </h1>
         <div className="flex flex-col items-start custom:flex-row mt-4 w-full">
           <div className="w-full space-y-10 w">
-            {sliderData.map((category, index) => (
+            {categories.map((category, index) => (
               <div key={index}>
                 <h2 className="text-[36px] font-['HelveticaNeueCyrb'] font-bold mb-4 ml-11">
                   {category.title}
@@ -247,6 +118,10 @@ export const MenuPage = () => {
                         src={item.image}
                         alt={item.name}
                         className="w-full rounded-t-[45px] h-[202px]"
+                        onClick={()=>{
+                          navigate(`/product/${item.id}`)
+                          window.location.reload();
+                      }}
                       />
                       <div className="px-3 py-2 flex-grow">
                         <div className="flex flex-row justify-between text-[15px]">
@@ -295,7 +170,7 @@ export const MenuPage = () => {
         </h1>
         <div className="flex flex-col items-start custom:flex-row mt-4 w-full">
           <div className="w-full space-y-10">
-            {sliderData.map((category, index) => (
+            {categories.map((category, index) => (
               <div key={index}>
                 <h2 className="text-[30px] font-['HelveticaNeueCyrb'] font-bold mb-4 ml-10">
                   {category.title}
@@ -310,6 +185,10 @@ export const MenuPage = () => {
                         src={item.image}
                         alt={item.name}
                         className="w-full rounded-t-[65px] h-[175px]"
+                        onClick={()=>{
+                          navigate(`/product/${item.id}`)
+                          window.location.reload();
+                      }}
                       />
                       <div className="px-3 py-2 flex-grow">
                         <div className="flex flex-row justify-between text-[15px]">
