@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
           <header className="px-[5%] bg-[#d2787800] py-[1%] h-auto font-[300] line-[]">
             <div className="items-center flex justify-between mx-auto ">
               <a href="/main" className="">
-                <img src="./logo.png" alt="logo" className="w-[75px] mx-auto" />
+                <img src="/logo.png" alt="logo" className="w-[75px] mx-auto" />
                 <p className="text-[10px] text-center">
                   Дом кондитерских
                   <br />
@@ -52,7 +52,7 @@ export const Header: React.FC = () => {
                   className="w-[45px] h-[45px] rounded-full bg-[#C5364B] flex items-center relative"
                 >
                   <img
-                    src="./Vector.png"
+                    src="/Vector.png"
                     alt="vector"
                     className="m-auto w-[25px] h-[25px]"
                   />
@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
                   </div>
                 </a>
                 <img
-                  src="./menu.svg"
+                  src="/menu.svg"
                   alt="menu"
                   className="m-auto h-[12px]"
                   onClick={() => setMenu(!menu)}
@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
             <>
               <div className="absolute w-[40%] h-full top-0 right-0 shadow-lg z-10 bg-[#C5364B] p-[3%]">
                 <img
-                  src="./close.png"
+                  src="/close.png"
                   alt="close"
                   className=" w-[25px] ml-auto h-[25px]"
                   onClick={() => setMenu(!menu)}
@@ -116,7 +116,7 @@ export const Header: React.FC = () => {
               </a>
             </div>
             <a href="/main" className="">
-              <img src="./logo.png" alt="logo" className="w-[100px] mx-auto" />
+              <img src="/logo.png" alt="logo" className="w-[100px] mx-auto" />
               <p className="text-[10px] text-center">
                 Дом кондитерских изделий
               </p>
@@ -136,7 +136,7 @@ export const Header: React.FC = () => {
                   href="/basket"
                   className="w-[50px] h-[50px] rounded-full bg-[#C5364B] flex items-center relative"
                 >
-                  <img src="./Vector.png" alt="vector" className="m-auto" />
+                  <img src="/Vector.png" alt="vector" className="m-auto" />
                   <div
                     className={`transition-transform duration-300 ease-in-out cursor-pointer flex text-white rounded-full w-[20px] h-[20px] hover:scale-[1.2] 
                   absolute bottom-[-7px] right-[0] items-center justify-center

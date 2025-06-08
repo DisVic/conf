@@ -57,7 +57,7 @@ export const Reviews = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+    setIsModalOpen(false)
     if (!formData.name || !formData.text) {
       setError("Пожалуйста, заполните все обязательные поля");
       return;
@@ -339,6 +339,7 @@ export const Reviews = () => {
               )}
               
               <button
+
                 type="submit"
                 className="bg-[#C5364B] w-full py-3 rounded-full text-white text-[16px] font-medium
                       transition-transform duration-300 hover:scale-[1.02]"
