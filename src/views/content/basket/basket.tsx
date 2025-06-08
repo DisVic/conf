@@ -61,6 +61,11 @@ export const Basket = () => {
                   key={index}
                   className="flex flex-row items-center justify-between mt-3"
                 >
+                  <img 
+            src={item.image} 
+            alt={item.name}
+            className="w-full h-auto object-cover"
+          />
                   <div className="flex flex-row items-center">
                     <p className="text-[16px] font-medium">{item.name}</p>
                     <p className="text-[16px] font-medium ml-2">

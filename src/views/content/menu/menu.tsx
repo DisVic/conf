@@ -55,45 +55,50 @@ export const MenuPage = () => {
     }
   }, []);
 
-  const addToCart = (itemName: string, itemPrice: number) => {
-    if (currentUser) {
-      const existingItemIndex = cart.findIndex(
-        (item) => item.name === itemName
-      );
+  const addToCart = (itemName: string, itemPrice: number, itemImage: string) => {
+  if (currentUser) {
+    const existingItemIndex = cart.findIndex(
+      (item) => item.name === itemName
+    );
 
-      let updatedCart;
-      if (existingItemIndex > -1) {
-        const updatedItem = {
-          ...cart[existingItemIndex],
-          quantity: cart[existingItemIndex].quantity + 1,
-        };
-        updatedCart = [
-          ...cart.slice(0, existingItemIndex),
-          updatedItem,
-          ...cart.slice(existingItemIndex + 1),
-        ];
-      } else {
-        updatedCart = [
-          ...cart,
-          { name: itemName, price: itemPrice, quantity: 1 },
-        ];
-      }
-
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      const updatedUsers = users.map((user: any) => {
-        if (user.login === currentUser.login) {
-          return { ...user, cart: updatedCart };
-        }
-        return user;
-      });
-
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
-      setCurrentUser((prevUser) =>
-        prevUser ? { ...prevUser, cart: updatedCart } : null
-      );
-      setCart(updatedCart);
+    let updatedCart;
+    if (existingItemIndex > -1) {
+      const updatedItem = {
+        ...cart[existingItemIndex],
+        quantity: cart[existingItemIndex].quantity + 1,
+      };
+      updatedCart = [
+        ...cart.slice(0, existingItemIndex),
+        updatedItem,
+        ...cart.slice(existingItemIndex + 1),
+      ];
+    } else {
+      updatedCart = [
+        ...cart,
+        { 
+          name: itemName, 
+          price: itemPrice, 
+          quantity: 1,
+          image: itemImage 
+        },
+      ];
     }
-  };
+
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const updatedUsers = users.map((user: any) => {
+      if (user.login === currentUser.login) {
+        return { ...user, cart: updatedCart };
+      }
+      return user;
+    });
+
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    setCurrentUser((prevUser) =>
+      prevUser ? { ...prevUser, cart: updatedCart } : null
+    );
+    setCart(updatedCart);
+  }
+};
 
   return (
     <div className="bg-white h-auto">
@@ -146,7 +151,9 @@ export const MenuPage = () => {
                             onClick={() =>
                               addToCart(
                                 item.name,
-                                parseFloat(item.price.replace(/\s/g, ""))
+                                parseFloat(item.price.replace(/\s/g, "")),
+                                item.image
+
                               )
                             }
                             className="w-full py-[10px] rounded-full bg-white text-black transition-transform duration-300 hover:scale-105 hover:shadow-lg"
@@ -212,7 +219,8 @@ export const MenuPage = () => {
                             onClick={() =>
                               addToCart(
                                 item.name,
-                                parseFloat(item.price.replace(/\s/g, ""))
+                                parseFloat(item.price.replace(/\s/g, "")),
+                                item.image
                               )
                             }
                             className="w-[100%] h-[55px] py-[10px] pb-[20px] rounded-b-[65px] bg-[#C5364B] text-white transition-transform duration-300 ease-in-out hover:shadow-[#C5364B]"
