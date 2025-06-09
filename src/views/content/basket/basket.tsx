@@ -44,12 +44,31 @@ export const Basket = () => {
       localStorage.setItem("users", JSON.stringify(users));
     }
   };
+  const updateQuantity = (itemName: string, newQuantity: number) => {
+    if (newQuantity < 1) return;
 
+    const updatedCart = cartItems.map((item) =>
+      item.name === itemName ? { ...item, quantity: newQuantity } : item
+    );
+
+    setCartItems(updatedCart);
+
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const loggedUser = users.find(
+      (user: { login: string }) =>
+        user.login === localStorage.getItem("loggedUser")
+    );
+
+    if (loggedUser) {
+      loggedUser.cart = updatedCart;
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+  };
   return (
     <>
       <div className="bg-white h-auto">
         <div className="pt-[50px] pb-[50px] max-w-[1234px] custom:mt-[150px] px-[5%] mx-auto flex flex-col custom:flex-row gap-10">
-          <div className="bg-[#ECDADA]  w-4/5 custom:w-3/5 px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px]">
+          <div className="bg-[#ECDADA] w-4/5 custom:w-3/5 px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px]">
             <div className="font-['HelveticaNeueCyrb'] font-bold flex flex-row items-start text-[24px] font-medium">
               <p>Корзина</p>
               <p className="text-[12px] font-light">{cartItems.length}</p>
@@ -59,29 +78,71 @@ export const Basket = () => {
               cartItems.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-row items-center justify-between mt-3"
+                  className="relative flex rounded-[21px] py-[15px] px-[20px] bg-white flex-col mt-3"
                 >
-                  <img 
-            src={item.image} 
-            alt={item.name}
-            className="w-full h-auto object-cover"
-          />
-                  <div className="flex flex-row items-center">
-                    <p className="text-[16px] font-medium">{item.name}</p>
-                    <p className="text-[16px] font-medium ml-2">
-                      {item.quantity} x {item.price} рублей
-                    </p>
-                  </div>
                   <button
                     onClick={() => removeFromCart(item.name)}
-                    className="text-red-500 hover:text-red-700 transition-colors duration-200 items-align-[right] ml-auto"
+                    className="absolute top-3 right-3 text-black hover:text-red-500"
                   >
-                    ✖️
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 6h18"></path>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
                   </button>
+
+                  <div className="flex flex-row items-start">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-[100px] h-[100px] object-cover rounded-lg"
+                    />
+                    <div className="flex flex-col ml-4 flex-1">
+                      <p className="text-[16px] font-bold">{item.name}</p>
+                      <p className="text-[14px] text-gray-600 mt-1">
+                        {item.description ||
+                          "Вкус позднего лета с нежным шоколадом"}
+                      </p>
+
+                      <div className="flex items-center mt-3">
+                        <div className="flex items-center">
+                          <button
+                            className="w-6 h-6 flex items-center justify-center border border-gray-300 rounded-full text-gray-500 hover:bg-gray-100"
+                            onClick={() =>
+                              updateQuantity(item.name, item.quantity - 1)
+                            }
+                          >
+                            -
+                          </button>
+                          <span className="mx-3">{item.quantity}</span>
+                          <button
+                            className="w-6 h-6 flex items-center justify-center border border-gray-300 rounded-full text-gray-500 hover:bg-gray-100"
+                            onClick={() =>
+                              updateQuantity(item.name, item.quantity + 1)
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                        <p className="ml-auto text-[16px] font-bold">
+                          {item.price * item.quantity} р
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))
             ) : (
-              <p className="font-['HelveticaNeueCyr'] text-[16px]  text-[#5e5757] text-center mt-[10px]">
+              <p className="font-['HelveticaNeueCyr'] text-[16px] text-[#5e5757] text-center mt-[10px]">
                 К сожалению, корзина пока пуста. <br />
                 Перейдите в раздел{" "}
                 <a
@@ -94,7 +155,7 @@ export const Basket = () => {
               </p>
             )}
           </div>
-          <div className="bg-[#ECDADA] w-4/5 custom:w-2/5 px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px] gap-5">
+          <div className="bg-[#ECDADA] w-4/5 custom:w-2/5 h-[425px] px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px] gap-5">
             <p className="text-[16px] font-medium font-['HelveticaNeueCyrr']">
               Адрес доставки
               <span className="font-light text-[#5e5757]"> (по умолчанию)</span>
@@ -102,17 +163,25 @@ export const Basket = () => {
             <p className="text-[16px] font-normal text-[#5e5757] mt-3 font-['HelveticaNeueCyr']">
               г. Москва, ул. 800-летия Москвы, д. 28к1
             </p>
-            <p className="text-[16px] font-normal mt-3 font-['HelveticaNeueCyr']">22-28 апреля</p>
+            <p className="text-[16px] font-normal mt-3 font-['HelveticaNeueCyr']">
+              22-28 апреля
+            </p>
             <div className="text-[16px] font-normal text-[#5e5757] mt-8">
               <div className="flex flex-row items-center justify-between">
-                <p className="font-['HelveticaNeueCyr']">Товары, {cartItems.length} шт.</p>
-                <p className="font-['HelveticaNeueCyr']">{calculateTotal()} рублей</p>
+                <p className="font-['HelveticaNeueCyr']">
+                  Товары, {cartItems.length} шт.
+                </p>
+                <p className="font-['HelveticaNeueCyr']">
+                  {calculateTotal()} рублей
+                </p>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[24px] font-medium mt-8">
               <p className="text-[24px] font-['HelveticaNeueCyrb']">Итого</p>
-              <p className="text-[24px] font-['HelveticaNeueCyrb']">{calculateTotal()} рублей</p>
+              <p className="text-[24px] font-['HelveticaNeueCyrb']">
+                {calculateTotal()} рублей
+              </p>
             </div>
 
             <div className="mt-3 flex flex-row items-center gap-3">

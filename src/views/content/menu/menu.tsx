@@ -19,8 +19,6 @@ const Menu: MenuItem[] = [
   { name: "Интересное", color: "", ico: Interesting },
 ];
 
-
-
 export const MenuPage = () => {
   const { categories } = useProducts();
   const [menuItems, setMenuItems] = useState<MenuItem[]>(Menu);
@@ -55,50 +53,54 @@ export const MenuPage = () => {
     }
   }, []);
 
-  const addToCart = (itemName: string, itemPrice: number, itemImage: string) => {
-  if (currentUser) {
-    const existingItemIndex = cart.findIndex(
-      (item) => item.name === itemName
-    );
+  const addToCart = (
+    itemName: string,
+    itemPrice: number,
+    itemImage: string
+  ) => {
+    if (currentUser) {
+      const existingItemIndex = cart.findIndex(
+        (item) => item.name === itemName
+      );
 
-    let updatedCart;
-    if (existingItemIndex > -1) {
-      const updatedItem = {
-        ...cart[existingItemIndex],
-        quantity: cart[existingItemIndex].quantity + 1,
-      };
-      updatedCart = [
-        ...cart.slice(0, existingItemIndex),
-        updatedItem,
-        ...cart.slice(existingItemIndex + 1),
-      ];
-    } else {
-      updatedCart = [
-        ...cart,
-        { 
-          name: itemName, 
-          price: itemPrice, 
-          quantity: 1,
-          image: itemImage 
-        },
-      ];
-    }
-
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const updatedUsers = users.map((user: any) => {
-      if (user.login === currentUser.login) {
-        return { ...user, cart: updatedCart };
+      let updatedCart;
+      if (existingItemIndex > -1) {
+        const updatedItem = {
+          ...cart[existingItemIndex],
+          quantity: cart[existingItemIndex].quantity + 1,
+        };
+        updatedCart = [
+          ...cart.slice(0, existingItemIndex),
+          updatedItem,
+          ...cart.slice(existingItemIndex + 1),
+        ];
+      } else {
+        updatedCart = [
+          ...cart,
+          {
+            name: itemName,
+            price: itemPrice,
+            quantity: 1,
+            image: itemImage,
+          },
+        ];
       }
-      return user;
-    });
 
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    setCurrentUser((prevUser) =>
-      prevUser ? { ...prevUser, cart: updatedCart } : null
-    );
-    setCart(updatedCart);
-  }
-};
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const updatedUsers = users.map((user: any) => {
+        if (user.login === currentUser.login) {
+          return { ...user, cart: updatedCart };
+        }
+        return user;
+      });
+
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setCurrentUser((prevUser) =>
+        prevUser ? { ...prevUser, cart: updatedCart } : null
+      );
+      setCart(updatedCart);
+    }
+  };
 
   return (
     <div className="bg-white h-auto">
@@ -123,17 +125,19 @@ export const MenuPage = () => {
                         src={item.image}
                         alt={item.name}
                         className="w-full rounded-t-[45px] h-[202px]"
-                        onClick={()=>{
-                          navigate(`/product/${item.id}`)
+                        onClick={() => {
+                          navigate(`/product/${item.id}`);
                           window.location.reload();
-                      }}
+                        }}
                       />
                       <div className="px-3 py-2 flex-grow">
                         <div className="flex flex-row justify-between text-[15px]">
                           <p className="font-bold font-[Choplin] text-[15px]">
                             {item.name}
                           </p>
-                          <p className="font-light font-[Choplin] text-[15px]">от {item.price}р</p>
+                          <p className="font-light font-[Choplin] text-[15px]">
+                            от {item.price}р
+                          </p>
                         </div>
                         <p className="text-[11px] font-light w-3/4">
                           {item.description}
@@ -153,7 +157,6 @@ export const MenuPage = () => {
                                 item.name,
                                 parseFloat(item.price.replace(/\s/g, "")),
                                 item.image
-
                               )
                             }
                             className="w-full py-[10px] rounded-full bg-white text-black transition-transform duration-300 hover:scale-105 hover:shadow-lg"
@@ -192,10 +195,10 @@ export const MenuPage = () => {
                         src={item.image}
                         alt={item.name}
                         className="w-full rounded-t-[65px] h-[175px]"
-                        onClick={()=>{
-                          navigate(`/product/${item.id}`)
+                        onClick={() => {
+                          navigate(`/product/${item.id}`);
                           window.location.reload();
-                      }}
+                        }}
                       />
                       <div className="px-3 py-2 flex-grow">
                         <div className="flex flex-row justify-between text-[15px]">

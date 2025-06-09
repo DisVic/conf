@@ -61,39 +61,53 @@ export const Home = () => {
     }
   }, []);
 
-  const addToCart = (itemName: string, itemPrice: number) => {
-    if (!currentUser) return;
+  const addToCart = (
+    itemName: string,
+    itemPrice: number,
+    itemImage: string
+  ) => {
+    if (currentUser) {
+      const existingItemIndex = cart.findIndex(
+        (item) => item.name === itemName
+      );
 
-    const index = cart.findIndex((item) => item.name === itemName);
-    let updatedCart;
+      let updatedCart;
+      if (existingItemIndex > -1) {
+        const updatedItem = {
+          ...cart[existingItemIndex],
+          quantity: cart[existingItemIndex].quantity + 1,
+        };
+        updatedCart = [
+          ...cart.slice(0, existingItemIndex),
+          updatedItem,
+          ...cart.slice(existingItemIndex + 1),
+        ];
+      } else {
+        updatedCart = [
+          ...cart,
+          {
+            name: itemName,
+            price: itemPrice,
+            quantity: 1,
+            image: itemImage,
+          },
+        ];
+      }
 
-    if (index > -1) {
-      const updatedItem = {
-        ...cart[index],
-        quantity: cart[index].quantity + 1,
-      };
-      updatedCart = [
-        ...cart.slice(0, index),
-        updatedItem,
-        ...cart.slice(index + 1),
-      ];
-    } else {
-      updatedCart = [
-        ...cart,
-        { name: itemName, price: itemPrice, quantity: 1 },
-      ];
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const updatedUsers = users.map((user: any) => {
+        if (user.login === currentUser.login) {
+          return { ...user, cart: updatedCart };
+        }
+        return user;
+      });
+
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setCurrentUser((prevUser) =>
+        prevUser ? { ...prevUser, cart: updatedCart } : null
+      );
+      setCart(updatedCart);
     }
-
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const updatedUsers = users.map((user: any) =>
-      user.login === currentUser.login ? { ...user, cart: updatedCart } : user
-    );
-
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    setCurrentUser((prevUser) =>
-      prevUser ? { ...prevUser, cart: updatedCart } : null
-    );
-    setCart(updatedCart);
   };
 
   useEffect(() => {
@@ -184,10 +198,11 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPressed(!isPressed);
-                      addToCart("Десерт 1", 1399);
+                      addToCart("Клубничный кайф", 1399, "/1.jpg");
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${isPressed ? "bg-[green]" : "bg-black"
-                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${
+                      isPressed ? "bg-[green]" : "bg-black"
+                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -212,10 +227,11 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPressedtr(!isPressedtr);
-                      addToCart("Десерт 2", 1399);
+                      addToCart("Вафельное чудо", 1399, "/2.jpg");
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${isPressedtr ? "bg-[green]" : "bg-black"
-                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${
+                      isPressedtr ? "bg-[green]" : "bg-black"
+                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -240,10 +256,11 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPresseddv(!isPresseddv);
-                      addToCart("Десерт 3", 1399);
+                      addToCart("Розовый БУМ", 1399, "/3.jpg");
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${isPresseddv ? "bg-[green]" : "bg-black"
-                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${
+                      isPresseddv ? "bg-[green]" : "bg-black"
+                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
@@ -268,10 +285,11 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPressedch(!isPressedch);
-                      addToCart("Десерт 4", 1399);
+                      addToCart("Трёхслойка", 1399, "/4.jpg");
                     }}
-                    className={`transition-transform duration-300 ease-in-out ${isPressedch ? "bg-[green]" : "bg-black"
-                      } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
+                    className={`transition-transform duration-300 ease-in-out ${
+                      isPressedch ? "bg-[green]" : "bg-black"
+                    } cursor-pointer flex text-white rounded-full w-[35px] h-[35px] hover:scale-[1.2] absolute bottom-[-10px] right-[0] items-center justify-center`}
                   >
                     <p className="flex mx-auto text-lg mb-[4px] text-[28px]">
                       +
