@@ -54,6 +54,57 @@ export const MenuPage = () => {
   }, []);
 
   const addToCart = (
+    itemId: string, // Добавлен идентификатор товара
+    itemName: string,
+    itemPrice: number,
+    itemImage: string
+  ) => {
+    if (currentUser) {
+      const existingItemIndex = cart.findIndex(
+        (item) => item.id === itemId // Теперь поиск по id вместо name
+      );
+
+      let updatedCart;
+      if (existingItemIndex > -1) {
+        const updatedItem = {
+          ...cart[existingItemIndex],
+          quantity: cart[existingItemIndex].quantity + 1,
+        };
+        updatedCart = [
+          ...cart.slice(0, existingItemIndex),
+          updatedItem,
+          ...cart.slice(existingItemIndex + 1),
+        ];
+      } else {
+        updatedCart = [
+          ...cart,
+          {
+            id: itemId, // Добавлен id в новый товар
+            name: itemName,
+            price: itemPrice,
+            quantity: 1,
+            image: itemImage,
+          },
+        ];
+      }
+
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const updatedUsers = users.map((user: any) => {
+        if (user.login === currentUser.login) {
+          return { ...user, cart: updatedCart };
+        }
+        return user;
+      });
+
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setCurrentUser((prevUser) =>
+        prevUser ? { ...prevUser, cart: updatedCart } : null
+      );
+      setCart(updatedCart);
+    }
+  };
+
+  const addToCarti = (
     itemName: string,
     itemPrice: number,
     itemImage: string
@@ -154,6 +205,7 @@ export const MenuPage = () => {
                           <button
                             onClick={() =>
                               addToCart(
+                                item.id,
                                 item.name,
                                 parseFloat(item.price.replace(/\s/g, "")),
                                 item.image

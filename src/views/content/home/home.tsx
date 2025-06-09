@@ -26,7 +26,13 @@ const slider = [
 ];
 
 export const Home = () => {
-  type CartItem = { name: string; price: number; quantity: number };
+  type CartItem = {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+  };
 
   const [isPressed, setIsPressed] = useState(false);
   const [isPresseddv, setIsPresseddv] = useState(false);
@@ -62,14 +68,13 @@ export const Home = () => {
   }, []);
 
   const addToCart = (
+    itemId: number,
     itemName: string,
     itemPrice: number,
     itemImage: string
   ) => {
     if (currentUser) {
-      const existingItemIndex = cart.findIndex(
-        (item) => item.name === itemName
-      );
+      const existingItemIndex = cart.findIndex((item) => item.id === itemId);
 
       let updatedCart;
       if (existingItemIndex > -1) {
@@ -86,6 +91,7 @@ export const Home = () => {
         updatedCart = [
           ...cart,
           {
+            id: itemId, // Добавлен id в новый товар
             name: itemName,
             price: itemPrice,
             quantity: 1,
@@ -198,7 +204,7 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPressed(!isPressed);
-                      addToCart("Клубничный кайф", 1399, "/1.jpg");
+                      addToCart(10, "Клубничный кайф", 1399, "/1.jpg");
                     }}
                     className={`transition-transform duration-300 ease-in-out ${
                       isPressed ? "bg-[green]" : "bg-black"
@@ -227,7 +233,7 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPressedtr(!isPressedtr);
-                      addToCart("Вафельное чудо", 1399, "/2.jpg");
+                      addToCart(11, "Вафельное чудо", 1399, "/2.jpg");
                     }}
                     className={`transition-transform duration-300 ease-in-out ${
                       isPressedtr ? "bg-[green]" : "bg-black"
@@ -256,7 +262,7 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPresseddv(!isPresseddv);
-                      addToCart("Розовый БУМ", 1399, "/3.jpg");
+                      addToCart(12, "Розовый БУМ", 1399, "/3.jpg");
                     }}
                     className={`transition-transform duration-300 ease-in-out ${
                       isPresseddv ? "bg-[green]" : "bg-black"
@@ -285,7 +291,7 @@ export const Home = () => {
                   <div
                     onClick={() => {
                       setIsPressedch(!isPressedch);
-                      addToCart("Трёхслойка", 1399, "/4.jpg");
+                      addToCart(13, "Трёхслойка", 1399, "/4.jpg");
                     }}
                     className={`transition-transform duration-300 ease-in-out ${
                       isPressedch ? "bg-[green]" : "bg-black"

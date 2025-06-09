@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/layout/footer";
+import { useNavigate } from "react-router-dom";
 
 export const Basket = () => {
   const [cartItems, setCartItems] = useState<
@@ -9,6 +10,7 @@ export const Basket = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [alert, setAlert] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setAlert("Заказ отправлен!");
@@ -105,9 +107,21 @@ export const Basket = () => {
                       src={item.image}
                       alt={item.name}
                       className="w-[100px] h-[100px] object-cover rounded-lg"
+                      onClick={() => {
+                        navigate(`/product/${item.id}`);
+                        window.location.reload();
+                      }}
                     />
                     <div className="flex flex-col ml-4 flex-1">
-                      <p className="text-[16px] font-bold">{item.name}</p>
+                      <p
+                        onClick={() => {
+                          navigate(`/product/${item.id}`);
+                          window.location.reload();
+                        }}
+                        className="text-[16px] font-bold"
+                      >
+                        {item.name}
+                      </p>
                       <p className="text-[14px] text-gray-600 mt-1">
                         {item.description ||
                           "Вкус позднего лета с нежным шоколадом"}
