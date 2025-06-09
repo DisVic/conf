@@ -31,7 +31,7 @@ export const Basket = () => {
       0
     );
   };
-
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1000);
   const removeFromCart = (itemName: string) => {
     const updatedCart = cartItems.filter((item) => item.name !== itemName);
     setCartItems(updatedCart);
@@ -69,9 +69,9 @@ export const Basket = () => {
   return (
     <>
       <div className="bg-white h-auto">
-        <div className="pt-[50px] pb-[50px] max-w-[1234px] custom:mt-[150px] px-[5%] mx-auto flex flex-col custom:flex-row gap-10">
-          <div className="bg-[#ECDADA] w-4/5 custom:w-3/5 px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px]">
-            <div className="font-['HelveticaNeueCyrb'] font-bold flex flex-row items-start text-[24px] font-medium">
+        <div className="pt-[50px] pb-[50px] max-w-[1234px] custom:mt-[150px] min-vv:px-[5%] mx-auto flex flex-col custom:flex-row gap-10">
+          <div className="bg-[#ECDADA] w-[95%] custom:w-3/5 px-[10px] cc:px-[25px] custom:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px]">
+            <div className="font-['HelveticaNeueCyrb'] font-bold flex flex-row items-start text-[24px]">
               <p>Корзина</p>
               <p className="text-[12px] font-light">{cartItems.length}</p>
             </div>
@@ -169,7 +169,7 @@ export const Basket = () => {
               </p>
             )}
           </div>
-          <div className="bg-[#ECDADA] w-4/5 custom:w-2/5 h-[425px] px-[20px] lm:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px] gap-5">
+          <div className="bg-[#ECDADA] w-[95%] custom:w-2/5 custom:h-[425px] px-[10px] cc:px-[25px] custom:px-[50px] py-10 mx-auto border-[#FECFCF] border-[1px] rounded-[29px] gap-5">
             <p className="text-[16px] font-medium font-['HelveticaNeueCyrr']">
               Адрес доставки
               <span className="font-light text-[#5e5757]"> (по умолчанию)</span>
@@ -192,8 +192,10 @@ export const Basket = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[24px] font-medium mt-8">
-              <p className="text-[24px] font-['HelveticaNeueCyrb']">Итого</p>
-              <p className="text-[24px] font-['HelveticaNeueCyrb']">
+              <p className="text-[18px] custom:text-[24px] font-['HelveticaNeueCyrb']">
+                Итого
+              </p>
+              <p className="text-[18px] custom:text-[24px] font-['HelveticaNeueCyrb']">
                 {calculateTotal()} рублей
               </p>
             </div>
@@ -302,54 +304,6 @@ export const Basket = () => {
           </div>
         </div>
       )}
-      <div className="mb-[48px] px-10 justify-center nemobile:hidden">
-        <p className="font-['HelveticaNeueCyr'] text-[13px] font-medium text-center">
-          Используйте наши социальные сети, чтобы связаться с нами или оставить
-          отзыв о нашей продукции! Наши сотрудники оперативно ответят вам и
-          помогут с вашими вопросами.
-        </p>
-        <p className="font-['HelveticaNeueCyr'] mt-[12px] font-medium text-[13px] text-center">
-          Колл-центр принимает звонки{" "}
-          <span className="font-['HelveticaNeueCyrb']">с 9:00 до 23:00.</span>{" "}
-          Ждем ваших вопросов, предложений и отзывов!
-        </p>
-        <p className="font-['HelveticaNeueCyrb'] mt-[12px] font-medium text-[13px] text-center">
-          8 999 765 65 65
-        </p>
-
-        <div className="flex items-center gap-2 mt-1 ml-[25%]">
-          <img
-            src="/instagram.svg"
-            alt="instagram"
-            className="w-4 h-4 self-end relative top-[-2px]"
-          />
-          <span className="font-['HelveticaNeueCyrr'] text-[13px]">
-            @confectioneryhouse
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2 mt-1 ml-[25%]">
-          <img
-            src="/tg.svg"
-            alt="tg"
-            className="w-4 h-4 self-end relative top-[-2px]"
-          />
-          <span className="font-['HelveticaNeueCyrr'] text-[13px]">
-            @confectioneryhouse
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2 mt-1 ml-[25%]">
-          <img
-            src="/vk.svg"
-            alt="vk"
-            className="w-4 h-4 self-end relative top-[-2px]"
-          />
-          <span className="font-['HelveticaNeueCyrr'] text-[13px]">
-            @confectioneryhouse
-          </span>
-        </div>
-      </div>
     </>
   );
 };

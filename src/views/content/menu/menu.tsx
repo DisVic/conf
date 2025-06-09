@@ -160,13 +160,13 @@ export const MenuPage = () => {
           Menu
         </h1>
         <div className="flex flex-col items-start custom:flex-row mt-4 w-full">
-          <div className="w-full space-y-10 w">
+          <div className="w-full space-y-10">
             {categories.map((category, index) => (
               <div key={index}>
                 <h2 className="text-[36px] font-['HelveticaNeueCyrb'] font-bold mb-4 ml-11">
                   {category.title}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-6 gap-x-[0px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 custom:grid-cols-3 gap-6">
                   {category.data.map((item, i) => (
                     <div
                       key={i}

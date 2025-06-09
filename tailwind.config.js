@@ -19,6 +19,8 @@ export default {
         xl: "1280px",
         "2xl": "1536px",
         "3xl": "1636px",
+        cc: "379px",
+        vv: "400px",
       },
     },
   },
