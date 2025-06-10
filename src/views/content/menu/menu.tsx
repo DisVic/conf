@@ -207,7 +207,7 @@ export const MenuPage = () => {
                               addToCart(
                                 item.id,
                                 item.name,
-                                parseFloat(item.price.replace(/\s/g, "")),
+                                item.price.split(" ")[1],
                                 item.image
                               )
                             }

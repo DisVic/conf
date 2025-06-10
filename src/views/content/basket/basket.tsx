@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Basket = () => {
   const [cartItems, setCartItems] = useState<
-    { name: string; price: number; quantity: number }[]
+    { id: number; name: string; price: number; quantity: number }[]
   >([]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
