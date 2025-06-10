@@ -69,11 +69,11 @@ export const ProductPage = () => {
             {product.calories}
           </div>
         </div>
-        <div className='font-light text-[13px] w-[552px] mt-[-70px] ml-[130px] mobile:hidden'>
+        <div className='font-light text-[13px] w-[552px] mt-[-20px] ml-[775px] mobile:hidden'>
           <a className='text-[16px] font-bold'>Калорийность: </a>{product.calories}
         </div>
+        <button className="w-[150px] ml-[332px] mt-[-30px] py-[10px] rounded-full bg-[#C5364B] text-white transition-transform duration-300 hover:scale-105 hover:shadow-lg mobile:hidden">В корзину</button>
       </div>
-      <button className="w-[150px] ml-[332px] mt-[-50px] py-[10px] rounded-full bg-[#C5364B] text-white transition-transform duration-300 hover:scale-105 hover:shadow-lg mobile:hidden">В корзину</button>
     </div>
   );
 };
