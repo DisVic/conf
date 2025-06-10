@@ -46,7 +46,7 @@ export const Delivery = () => {
             <div className="flex flex-col items-center custom:flex-row justify-center gap-10">
               
               <div className="custom:w-[70%] w-[90%] mt-10 text-center">
-                <h1 className="font-['HelveticaNeueCyrr'] mobile:text-[20px]  mobile:w-[300px] text-[40px] font-normal max-custom:text-center">
+                <h1 className="font-['HelveticaNeueCyrr'] mobile:text-[20px]  mobile:w-[300px] mobile:ml-[20px] text-[40px] font-normal max-custom:text-center">
                   Узнать стоимость доставки
                   <span className="font-['HelveticaNeueCyrb']"> бесплатно</span>
                 </h1>

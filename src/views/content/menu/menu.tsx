@@ -170,12 +170,12 @@ export const MenuPage = () => {
                   {category.data.map((item, i) => (
                     <div
                       key={i}
-                      className="w-full bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] w-[280px] mx-auto flex flex-col h-full h-[348px] "
+                      className="w-[277px] bg-[#ffc6c6] rounded-[45px] border-[1px] border-[#F59696] w-[280px] mx-auto flex flex-col h-full h-[348px] "
                     >
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-full rounded-t-[45px] h-[202px]"
+                        className="w-full rounded-t-[45px] h-[202px] hover:cursor-pointer"
                         onClick={() => {
                           navigate(`/product/${item.id}`);
                           window.location.reload();
@@ -187,7 +187,7 @@ export const MenuPage = () => {
                             {item.name}
                           </p>
                           <p className="font-light font-[Choplin] text-[15px]">
-                            от {item.price}р
+                            {item.price} р
                           </p>
                         </div>
                         <p className="text-[11px] font-light w-3/4">
@@ -259,7 +259,7 @@ export const MenuPage = () => {
                           </p>
                         </div>
                         <p className="font-['Choplin'] text-[13px] font-light w-3/4">
-                          от {item.price}р
+                          {item.price} р
                         </p>
                       </div>
                       <div className="flex flex-row justify-between">
@@ -273,6 +273,7 @@ export const MenuPage = () => {
                           <button
                             onClick={() =>
                               addToCart(
+                                item.id,
                                 item.name,
                                 parseFloat(item.price.replace(/\s/g, "")),
                                 item.image

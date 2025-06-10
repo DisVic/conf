@@ -225,9 +225,6 @@ export const Reviews = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#C5364B] to-[#FFF] p-1 mr-3">
                   <div
                     className="w-full h-full rounded-full bg-cover bg-center"
-                    style={{
-                      backgroundImage: `url(/image${review.id}.jpg)`
-                    }}
                   ></div>
                 </div>
                 <div>
